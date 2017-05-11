@@ -32,26 +32,49 @@ body {
   padding-top: 80px
 }
 
+.app {
+  max-width: 80%;
+  margin: auto;
+}
+
 h1, h2, h3, h4, h5, h6 {
   line-height: 1;
 }
 
-h1 {
-  font-size: 15px;
+.jumbotron h1 {
+  font-size: 30px;
   letter-spacing: -1px;
   margin-bottom: 30px;
-  text-align: center;
+  text-align: left;
   font-weight: normal;
-  color: $gray-light;
+}
+
+h1 {
+  font-size: 2.0em;
+  letter-spacing: -1px;
+  text-align: left;
+  font-weight: bold;
+  margin-bottom: 30px;
 }
 
 h2 {
   font-size: 1.2em;
   letter-spacing: -1px;
-  margin-bottom: 30px;
   text-align: center;
   font-weight: normal;
   color: $gray-light;
+}
+
+p {
+  margin-bottom: -20px
+}
+
+.subheading {
+  font-size: 1.0em;
+  letter-spacing: -1px;
+  text-align: left;
+  font-weight: bold;
+  margin-bottom: -20px
 }
 
 // button

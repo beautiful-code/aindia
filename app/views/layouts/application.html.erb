@@ -8,7 +8,7 @@
   <body>
    <%= render 'layouts/header' %>
    <span style="display:block; height: 60;"></span>
-   <div class="container">
+   <div class="container app">
      <% flash.each do |message_type, message| %>
        <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
      <% end %>
