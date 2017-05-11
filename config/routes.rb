@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root 'users#new'
   get 'users/new'
   get 'sessions/create'
+  delete '/logout',  to: 'sessions#destroy'
 
   resources :users
 
