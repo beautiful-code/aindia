@@ -1,0 +1,2 @@
+class SocialInterest < ApplicationRecord
+end
