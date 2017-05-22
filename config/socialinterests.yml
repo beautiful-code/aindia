@@ -1,19 +1,19 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 socialinterests:
-  one:
+  -
       title: Education
       description: MyText
       image_url: MyString
       followerscount: 4
 
-  two:
+  -
       title: Sanitation
       description: MyText2
       image_url: MyString
       followerscount: 5
 
-  three:
+  -     
       title: Food-Donation
       description: MyText2
       image_url: MyString

@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  include UsersHelper
+
   def new
   end
 
@@ -7,6 +9,8 @@ class UsersController < ApplicationController
   end
 
   def edit
+    byebug
+    self.parse_yaml_file
     @user = User.find(params[:id])
   end
 

@@ -1,8 +1,21 @@
+require 'yaml'
+
 module UsersHelper
   def image_for(user, size: 60)
     if user.image_url
       imageurl = "https://sports.ndtv.com/cricket/teams/6-india-teamprofile?s=#{size}"
       image_tag(imageurl, alt: user.name, class: "gravatar")
     end
+  end
+
+  def parse_yaml_file
+    data = YAML.load_file 'config/socialinterests.yml'
+    puts(data)
+    byebug
+    @socialinterests = []
+    data['socialinterests'].each do |hash|
+      @socialinterests.push(SocialInterest.initialize(hash))
+    end
+    puts(@socialinterests.count)
   end
 end
