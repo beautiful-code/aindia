@@ -3,18 +3,18 @@
 socialinterests:
   -
       title: Education
-      description: MyText
-      image_url: MyString
+      description: MyText1
+      image_url: imag1
       followerscount: 4
 
   -
       title: Sanitation
       description: MyText2
-      image_url: MyString
+      image_url: imag2
       followerscount: 5
 
-  -     
+  -
       title: Food-Donation
-      description: MyText2
-      image_url: MyString
+      description: MyText3
+      image_url: imag3
       followerscount: 13

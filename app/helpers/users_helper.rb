@@ -9,13 +9,13 @@ module UsersHelper
   end
 
   def parse_yaml_file
+    ret = []
     data = YAML.load_file 'config/socialinterests.yml'
     puts(data)
-    byebug
-    @socialinterests = []
     data['socialinterests'].each do |hash|
-      @socialinterests.push(SocialInterest.initialize(hash))
+      ret << SocialInterest.new(hash)
     end
-    puts(@socialinterests.count)
+    puts("Social interests count: #{ret.count}")
+    ret
   end
 end

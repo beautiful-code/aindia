@@ -1,0 +1,27 @@
+-# .list-group
+-#   %a.list-group-item{:href => "#"}
+-#     %h4.list-group-item-heading First List Group Item Heading
+-#     %p.list-group-item-text List Group Item Text
+-#   %a.list-group-item{:href => "#"}
+-#     %h4.list-group-item-heading Second List Group Item Heading
+-#     %p.list-group-item-text List Group Item Text
+-#   %a.list-group-item{:href => "#"}
+-#     %h4.list-group-item-heading Third List Group Item Heading
+-#     %p.list-group-item-text List Group Item Text
+
+-# .row
+-#   .col-md-12
+-#     %table.table
+-#       %tbody
+-#         - @socialinterests.each do |sinterest|
+-#           %tr
+-#             %td= sinterest.title
+.table-responsive
+  %table.table.table-bordered.table-striped.table-highlight
+    %tbody
+      - for socialinterest in @socialinterests
+        %tr.centered
+          %td.col-md-4
+            %label{:for => "sel1"}= socialinterest.title
+  .centered
+    = submit_tag 'Submit'
