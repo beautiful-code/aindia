@@ -9,7 +9,6 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @socialinterests = parse_yaml_file
     @user = User.find(params[:id])
   end
 

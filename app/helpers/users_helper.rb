@@ -10,6 +10,7 @@ module UsersHelper
 
   def parse_yaml_file
     ret = []
+    byebug
     data = YAML.load_file 'config/socialinterests.yml'
     puts(data)
     data['socialinterests'].each do |hash|
