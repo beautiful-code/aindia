@@ -30,6 +30,10 @@ class UsersController < ApplicationController
     redirect_to users_url
   end
 
+  def interests
+    @user = User.find(params[:id])
+  end
+
 private
 def user_params
   params.require(:user).permit(:name, :uid, :provider, :oauth_token, :oauth_expires_at, :email, :image_url, :dob, :gender)
