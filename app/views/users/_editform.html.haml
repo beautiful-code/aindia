@@ -17,8 +17,14 @@
 -#     = f.password_field :password_confirmation, class: 'form-control'
 %form.form-horizontal{:action => "/action_page.php"}
   .form-group
-    .col-sm-10
-      %input#age.form-control{:name => "age", :placeholder => "Enter Age", :type => "age"}/
+    %label Date of Birth
+    %input#exampleInputDOB1.form-control{:placeholder => "Date of Birth", :type => "date"}/
   .form-group
-    .col-sm-10
-      %input#gender.form-control{:name => "gender", :placeholder => "Enter Gender", :type => "age"}/
+    %label Gender
+    .btn-group{"data-toggle" => "buttons"}
+      %label.btn.btn-default
+        %input{:name => "gender", :type => "radio", :value => "male"}/
+        Male
+      %label.btn.btn-default
+        %input{:name => "gender", :type => "radio", :value => "female"}/
+        Female
