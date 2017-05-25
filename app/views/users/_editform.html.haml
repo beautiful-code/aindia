@@ -20,11 +20,7 @@
     %label Date of Birth
     %input#exampleInputDOB1.form-control{:placeholder => "Date of Birth", :type => "date"}/
   .form-group
-    %label Gender
-    .btn-group{"data-toggle" => "buttons"}
-      %label.btn.btn-default
-        %input{:name => "gender", :type => "radio", :value => "male"}/
-        Male
-      %label.btn.btn-default
-        %input{:name => "gender", :type => "radio", :value => "female"}/
-        Female
+    %label{:for => "sel1"} Gender
+    %select#sel1.form-control
+      %option Male
+      %option Female
