@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  enum gender: [ :Male, :Female ]
+
   has_many :issues, dependent: :destroy
 
 

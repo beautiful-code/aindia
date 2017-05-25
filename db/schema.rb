@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170524085037) do
+ActiveRecord::Schema.define(version: 20170525065802) do
 
   create_table "authorizations", force: :cascade do |t|
     t.string   "provider"
@@ -51,6 +51,8 @@ ActiveRecord::Schema.define(version: 20170524085037) do
     t.datetime "updated_at",       null: false
     t.string   "image_url"
     t.string   "email"
+    t.date     "dob"
+    t.integer  "gender"
   end
 
 end
