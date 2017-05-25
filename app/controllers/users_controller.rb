@@ -1,7 +1,12 @@
 class UsersController < ApplicationController
+  before_action :redirect_if_logged_in, only: [:new, :create]
+
   include UsersHelper
 
   def new
+    if logged_in?
+      redirect_to user
+    end
   end
 
   def show
@@ -39,5 +44,8 @@ def user_params
   params.require(:user).permit(:name, :uid, :provider, :oauth_token, :oauth_expires_at, :email, :image_url, :dob, :gender)
 end
 
+def redirect_if_logged_in
+  redirect_to @current_user if logged_in?
+end
 
 end
