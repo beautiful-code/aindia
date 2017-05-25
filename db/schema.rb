@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170525065802) do
+ActiveRecord::Schema.define(version: 20170525081251) do
 
   create_table "authorizations", force: :cascade do |t|
     t.string   "provider"
@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(version: 20170525065802) do
     t.string   "image_url"
     t.string   "email"
     t.date     "dob"
-    t.integer  "gender"
+    t.string   "gender"
   end
 
 end

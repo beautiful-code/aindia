@@ -1,6 +1,4 @@
 class User < ApplicationRecord
-  enum gender: [ :Male, :Female ]
-
   has_many :issues, dependent: :destroy
 
 
@@ -17,11 +15,6 @@ def self.from_omniauth(auth)
     user.email = auth.info.email
     user.save!
   end
-end
-
-private
-def user_params
-  params.require(:user).permit(:name, :uid, :provider, :oauth_token, :oauth_expires_at, :email, :image_url)
 end
 
 end

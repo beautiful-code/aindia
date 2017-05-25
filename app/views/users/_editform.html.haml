@@ -15,12 +15,14 @@
 -#     = f.password_field :password, class: 'form-control'
 -#     = f.label :password_confirmation
 -#     = f.password_field :password_confirmation, class: 'form-control'
-%form.form-horizontal{:action => "/action_page.php"}
-  .form-group
-    %label Date of Birth
-    %input#exampleInputDOB3.form-control{:placeholder => "Date of Birth", :type => "date"}/
-  .form-group
-    %label{:for => "sel1"} Gender
-    %select#sel1.form-control
-      %option Male
-      %option Female
+= form_for(@user) do |f|
+  %form.form-horizontal{:action => "/action_page.php"}
+    .form-group
+      =f.label :dob, "Date Of Birth"
+      =f.date_field :dob, class: 'form-control'
+    .form-group
+      =f.label :gender, "Gender"
+      =f.select :gender, options_for_select([["Select", ""], "Male", "Female"], @user.gender), class: 'form-control'
+
+    .form-group
+      = submit_tag 'Update', class: "btn btn-primary"
