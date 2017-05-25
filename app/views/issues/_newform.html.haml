@@ -7,11 +7,11 @@
       %ul
         - issue.errors.full_messages.each do |message|
           %li= message
-  .field
+  .form-group
     = f.label :title
-    = f.text_area :title
-  .field
+    = f.text_field :title, class: 'form-control'
+  .form-group
     = f.label :content
-    = f.text_area :content
-  .actions
-    = f.submit
+    = f.text_area :content, class: 'form-control'
+  .form-group
+    = submit_tag 'Create Issue', class: "btn btn-primary"
