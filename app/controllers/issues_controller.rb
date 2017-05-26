@@ -8,6 +8,7 @@ class IssuesController < ApplicationController
   end
 
   def create
+    byebug
     @issue = current_user.issues.build(issue_params)
     if @issue.save
       flash[:success] = "Issue created!"
@@ -20,7 +21,7 @@ class IssuesController < ApplicationController
   private
 
     def issue_params
-      params.require(:issue).permit(:content, :picture)
+      params.require(:issue).permit(:content, :imageurl, :user_id, :title)
     end
 
     def correct_user

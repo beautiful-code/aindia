@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170525081251) do
+ActiveRecord::Schema.define(version: 20170525102308) do
 
   create_table "authorizations", force: :cascade do |t|
     t.string   "provider"
@@ -30,6 +30,16 @@ ActiveRecord::Schema.define(version: 20170525081251) do
     t.string   "imageurl"
     t.index ["user_id", "created_at"], name: "index_issues_on_user_id_and_created_at"
     t.index ["user_id"], name: "index_issues_on_user_id"
+  end
+
+  create_table "relationships", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "interest_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["interest_id"], name: "index_relationships_on_interest_id"
+    t.index ["user_id", "interest_id"], name: "index_relationships_on_user_id_and_interest_id", unique: true
+    t.index ["user_id"], name: "index_relationships_on_user_id"
   end
 
   create_table "social_interests", force: :cascade do |t|
@@ -53,6 +63,7 @@ ActiveRecord::Schema.define(version: 20170525081251) do
     t.string   "email"
     t.date     "dob"
     t.string   "gender"
+    t.text     "interests_data"
   end
 
 end

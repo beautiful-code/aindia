@@ -14,4 +14,7 @@
     = f.label :content
     = f.text_area :content, class: 'form-control'
   .form-group
+    %span.picture
+      = f.file_field :imageurl
+  .form-group
     = submit_tag 'Create Issue', class: "btn btn-primary"
