@@ -1,8 +1,6 @@
 class UsersController < ApplicationController
   before_action :redirect_if_logged_in, only: [:new, :create]
 
-  include UsersHelper
-
   def new
     if logged_in?
       redirect_to user
@@ -11,6 +9,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+
+    @issues = @user.issues.paginate(page: params[:page])
   end
 
   def edit
