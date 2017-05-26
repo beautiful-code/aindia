@@ -1,9 +1,13 @@
 %li{:id => "#{issue.id}"}
   -# = link_to image_for(issue.user, size: 50), issue.user
-  %span.user= link_to issue.user.name, issue.user
-  %span.content
-    = issue.content
-    = image_tag issue.imageurl.url if issue.imageurl?
+  -# %span.user= link_to issue.user.name, issue.user
+  .form-group
+    %h3
+      = issue.title
+  .form-group
+    %span.content
+      = issue.content
+      = image_tag issue.imageurl.url if issue.imageurl?
   %span.timestamp
     Posted #{time_ago_in_words(issue.created_at)} ago.
     - if current_user?(issue.user)
