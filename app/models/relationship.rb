@@ -1,6 +1,6 @@
 class Relationship < ApplicationRecord
-  belongs_to :follower, class_name: "User"
-  belongs_to :followed, class_name: "SocialInterest"
-  validates :follower_id, presence: true
-  validates :followed_id, presence: true
+  belongs_to :user_id, class_name: "User"
+  belongs_to :interest_id, class_name: "SocialInterest"
+  validates :user_id, presence: true
+  validates :interest_id, presence: true
 end
