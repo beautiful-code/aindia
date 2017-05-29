@@ -8,7 +8,6 @@
 
 data = YAML.load_file 'config/socialinterests.yml'
 data['socialinterests'].each do |sinterest|
-  byebug
   title = sinterest["title"]
   description = sinterest["description"]
   imageurl = sinterest["image_url"]
