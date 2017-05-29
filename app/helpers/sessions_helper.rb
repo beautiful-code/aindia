@@ -2,6 +2,7 @@ module SessionsHelper
 
 def log_in(user)
   session[:user_id] = user.id
+  current_user
 end
 
 # Remembers a user in a persistent session.
@@ -37,7 +38,7 @@ end
 
 # Returns true if the user is logged in, false otherwise.
 def logged_in?
-  !current_user.nil?
+  !@current_user.nil?
 end
 
 def log_out
