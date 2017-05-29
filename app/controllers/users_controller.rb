@@ -3,7 +3,6 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show]
 
   def new
-    byebug
     if logged_in?
       redirect_to user
     end

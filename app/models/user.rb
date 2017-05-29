@@ -5,6 +5,10 @@ class User < ApplicationRecord
                                    dependent:   :destroy
   has_many :following, through: :passive_relationships, source: :interest_id
 
+  # TODO: habtm :interests
+
+  # TODO: def add_interest
+
 def self.from_omniauth(auth)
   #where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
   where(provider: auth.provider, uid: auth.uid).first_or_initialize do |user|
