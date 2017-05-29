@@ -10,7 +10,14 @@ Rails.application.routes.draw do
       get 'interests'
     end
   end
+
   resources :issues,          only: [:new, :create, :destroy]
+  # do
+  #   member do
+  #     get :followers
+  #   end
+  # end
+  resources :relationships,       only: [:create, :destroy]
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   match '/auth/:provider/callback', :to => 'sessions#create', via: :get

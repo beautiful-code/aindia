@@ -12,15 +12,6 @@
 
 ActiveRecord::Schema.define(version: 20170525102308) do
 
-  create_table "authorizations", force: :cascade do |t|
-    t.string   "provider"
-    t.string   "uid"
-    t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_authorizations_on_user_id"
-  end
-
   create_table "issues", force: :cascade do |t|
     t.text     "content"
     t.integer  "user_id"
@@ -63,7 +54,6 @@ ActiveRecord::Schema.define(version: 20170525102308) do
     t.string   "email"
     t.date     "dob"
     t.string   "gender"
-    t.text     "interests_data"
   end
 
 end
