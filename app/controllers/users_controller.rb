@@ -36,7 +36,6 @@ class UsersController < ApplicationController
   end
 
   def interests
-    byebug
     @user = User.find(params[:id])
   end
 
