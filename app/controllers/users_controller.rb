@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :redirect_if_logged_in, only: [:new, :create]
-  before_action :set_user, only: [:new, :show]
+  before_action :set_user, only: [:show]
 
   def new
     byebug

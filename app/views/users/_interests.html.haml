@@ -2,7 +2,7 @@
   - SocialInterest.all.each do |sinterest|
     %a.list-group-item{:href => "#"}
       %span.pull-right
-        -if sinterest.following?(@user.uid)
+        -if sinterest.following?(@current_user.id)
           %button.btn.btn-default{:type => "submit"} Unfollow
         -else
           %button.btn.btn-default{:type => "submit"} Follow
