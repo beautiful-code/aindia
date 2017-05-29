@@ -1,6 +1,9 @@
 class User < ApplicationRecord
   has_many :issues, dependent: :destroy
-
+  has_many :passive_relationships, class_name:  "Relationship",
+                                   foreign_key: "followed_id",
+                                   dependent:   :destroy
+  has_many :following, through: :active_relationships, source: :followed
 
 def self.from_omniauth(auth)
   #where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
