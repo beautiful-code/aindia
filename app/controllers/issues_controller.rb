@@ -8,7 +8,6 @@ class IssuesController < ApplicationController
   end
 
   def create
-    byebug
     @issue = current_user.issues.build(issue_params)
     if @issue.save
       flash[:success] = "Issue created!"
