@@ -1,24 +1,20 @@
-# README
+## About
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+“Adopt India” is to connect people who are socially responsible and to support and encourage civic participation in solving social issues.  http://adoptindia.org/
 
-Things you may want to cover:
+## Developer Notes
 
-* Ruby version
+Ruby Version - 2.4.0
+Rails Version - 5.1.0
 
-* System dependencies
+## Deployment Steps
 
-* Configuration
+* Run "bundle install" to install the dependencies.
+* Run "rails s" to install the app on local host.
+* 
 
-* Database creation
 
-* Database initialization
+## Test Steps 
 
-* How to run the test suite
+* TODO
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
