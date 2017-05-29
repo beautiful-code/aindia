@@ -11,7 +11,8 @@ Rails Version - 5.1.0
 
 * Run "bundle install" to install the dependencies.
 * Run "rails s" to install the app on local host.
-* 
+* Run "rails db:migrate" 
+* Run "rails db:seed"
 
 
 ## Test Steps 
