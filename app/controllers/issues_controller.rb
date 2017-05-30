@@ -16,6 +16,13 @@ class IssuesController < ApplicationController
     end
   end
 
+  def destroy
+    # user = User.find(params[:id])
+    @issue.destroy
+    flash[:success] = "Issue deleted"
+    redirect_to @current_user
+  end
+
   private
 
     def issue_params
