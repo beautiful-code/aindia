@@ -44,6 +44,7 @@ class UsersController < ApplicationController
       @current_user.follow_interest(interest)
     end
     puts("update called")
+    redirect_to :back
   end
 
 private
