@@ -33,6 +33,17 @@ class UsersController < ApplicationController
   end
 
   def interests
+    puts("interests called")
+  end
+
+  def updatefollowinterests
+    interest = SocialInterest.find(params[:interest_id])
+    if @current_user.is_following?(interest)
+      @current_user.unfollow_interest(interest)
+    else
+      @current_user.follow_interest(interest)
+    end
+    puts("update called")
   end
 
 private

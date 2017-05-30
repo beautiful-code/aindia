@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get 'sessions/create'
   delete '/logout',  to: 'sessions#destroy'
   put 'select_interests', to: 'users#selectinterests', as: :select_interests
+  post 'users/:id/followinterest/:interest_id', to: 'users#updatefollowinterests', as: :follow_interest
 
   resources :users do
     member do

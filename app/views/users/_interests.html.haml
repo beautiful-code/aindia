@@ -1,10 +1,11 @@
 .list-group
   - SocialInterest.all.each do |sinterest|
-    %a.list-group-item{:href => "#"}
+    -# %a.list-group-item{:href => "#"}
+    %a.list-group-item
       %span.pull-right
-        -if sinterest.following?(@current_user.id)
-          %button.btn.btn-default{:type => "submit"} Unfollow
+        -if @current_user.is_following?(sinterest)
+          = button_to "Unfollow", { action: "updatefollowinterests", interest_id: sinterest }
         -else
-          %button.btn.btn-default{:type => "submit"} Follow
+          = button_to "Follow", { action: "updatefollowinterests", interest_id: sinterest }
       %h3.list-group-item-heading #{sinterest.title}
       %p.list-group-item-text #{sinterest.description}
