@@ -5,3 +5,11 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+data = YAML.load_file 'config/socialinterests.yml'
+data['socialinterests'].each do |sinterest|
+  title = sinterest["title"]
+  description = sinterest["description"]
+  imageurl = sinterest["image_url"]
+  SocialInterest.create!(title: title, description: description, image_url: imageurl, followerscount: 0)
+end

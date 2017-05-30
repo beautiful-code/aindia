@@ -10,16 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170525102308) do
-
-  create_table "authorizations", force: :cascade do |t|
-    t.string   "provider"
-    t.string   "uid"
-    t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_authorizations_on_user_id"
-  end
+ActiveRecord::Schema.define(version: 20170530084530) do
 
   create_table "issues", force: :cascade do |t|
     t.text     "content"
@@ -51,6 +42,12 @@ ActiveRecord::Schema.define(version: 20170525102308) do
     t.datetime "updated_at",     null: false
   end
 
+  create_table "social_interests_users", id: false, force: :cascade do |t|
+    t.integer "social_interest_id", null: false
+    t.integer "user_id",            null: false
+    t.index ["social_interest_id", "user_id"], name: "index_social_interests_users_on_social_interest_id_and_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "provider"
     t.string   "uid"
@@ -63,7 +60,6 @@ ActiveRecord::Schema.define(version: 20170525102308) do
     t.string   "email"
     t.date     "dob"
     t.string   "gender"
-    t.text     "interests_data"
   end
 
 end

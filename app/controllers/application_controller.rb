@@ -1,10 +1,19 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
+  before_action :current_user
   include SessionsHelper
 
-  protected
+  private
   def current_user
-    @current_user ||= User.find_by_id(session[:user_id])
+    if (user_id = session[:user_id])
+      @current_user ||= User.find_by(id: user_id)
+    elsif (user_id = cookies.signed[:user_id])
+      user = User.find_by(id: user_id)
+      if user && user.authenticated?(:remember, cookies[:remember_token])
+        log_in user
+        @current_user = user
+      end
+    end
   end
 
   def signed_in?
@@ -17,9 +26,8 @@ class ApplicationController < ActionController::Base
     session[:user_id] = user.id
   end
 
-private
   # Confirms a logged-in user.
-  def logged_in_user
+  def verify_user_has_logged_in
     unless logged_in?
       store_location
       flash[:danger] = "Please log in."

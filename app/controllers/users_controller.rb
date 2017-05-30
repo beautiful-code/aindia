@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
   before_action :redirect_if_logged_in, only: [:new, :create]
-
-  include UsersHelper
+  before_action :set_user, only: [:show]
 
   def new
     if logged_in?
@@ -10,16 +9,14 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+    @issues = @user.issues.paginate(page: params[:page])
   end
 
   def edit
-    @user = User.find(params[:id])
   end
 
   def update
-    @user = User.find(params[:id])
-    if @user.update_attributes(user_params)
+    if @current_user.update_attributes(user_params)
       # Handle a successful update.
     else
       render 'edit'
@@ -36,16 +33,32 @@ class UsersController < ApplicationController
   end
 
   def interests
-    @user = User.find(params[:id])
+    puts("interests called")
+  end
+
+  def updatefollowinterests
+    interest = SocialInterest.find(params[:interest_id])
+    if @current_user.is_following?(interest)
+      @current_user.unfollow_interest(interest)
+    else
+      @current_user.follow_interest(interest)
+    end
+    puts("update called")
+    redirect_to :back
   end
 
 private
-def user_params
-  params.require(:user).permit(:name, :uid, :provider, :oauth_token, :oauth_expires_at, :email, :image_url, :dob, :gender)
-end
 
-def redirect_if_logged_in
-  redirect_to @current_user if logged_in?
-end
+  def set_user
+    @user = User.find(params[:id])
+  end
+
+  def user_params
+    params.require(:user).permit(:name, :uid, :provider, :oauth_token, :oauth_expires_at, :email, :image_url, :dob, :gender)
+  end
+
+  def redirect_if_logged_in
+    redirect_to @current_user if logged_in?
+  end
 
 end

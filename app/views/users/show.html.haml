@@ -3,4 +3,14 @@
   %aside.col-md-4
     %section.user_info
       %h1
+        = image_for @user
         = @user.name
+  .col-md-8
+    - if @user.issues.any?
+      .form-group
+        %h3
+          Causes (#{@user.issues.count})
+      .form-group
+        %ol.issues
+          = render @issues
+        = will_paginate @issues
