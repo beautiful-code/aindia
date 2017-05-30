@@ -1,6 +1,5 @@
 class Issue < ApplicationRecord
-  # belongs_to :leader, class_name: "User"
- belongs_to :user
+  belongs_to :user
   # TODO: belongs_to :leader, :class_name => "User"
 
   default_scope -> { order(created_at: :desc) }
