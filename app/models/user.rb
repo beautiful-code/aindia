@@ -1,13 +1,14 @@
 class User < ApplicationRecord
   has_many :issues, dependent: :destroy
-  has_many :passive_relationships, class_name:  "Relationship",
-                                   foreign_key: "interest_id",
-                                   dependent:   :destroy
-  has_many :following, through: :passive_relationships, source: :interest_id
+  has_and_belongs_to_many :socialinterests, class_name: "SocialInterest"
 
+  # has_many :passive_relationships, class_name:  "Relationship",
+  #                                  foreign_key: "interest_id",
+  #                                  dependent:   :destroy
+  # has_many :following, through: :passive_relationships, source: :interest_id
+  #
   # TODO: habtm :interests
 
-  # TODO: def add_interest
 
 def self.from_omniauth(auth)
   #where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
@@ -24,4 +25,15 @@ def self.from_omniauth(auth)
   end
 end
 
+  def follow_interest(social_interest)
+    socialinterests << social_interest
+  end
+
+  def unfollow_interest(social_interest)
+    socialinterests.delete(social_interest)
+  end
+
+  def is_following?(social_interest)
+    socialinterests.include?(social_interest)
+  end
 end
