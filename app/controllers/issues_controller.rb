@@ -1,5 +1,5 @@
 class IssuesController < ApplicationController
-  before_action :verify_user_has_logged_in, only: [:create, :destroy]
+  before_action :verify_user_has_logged_in, only: [:new, :create, :destroy]
   before_action :verify_current_user_is_owner,   only: :destroy
 
   def new
