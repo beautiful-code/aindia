@@ -37,3 +37,8 @@ group :development do
   gem 'spring-watcher-listen'
   gem 'web-console'
 end
+
+group :test do
+  gem 'factory_girl_rails'
+  gem 'faker'
+end
