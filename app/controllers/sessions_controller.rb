@@ -13,6 +13,10 @@ class SessionsController < ApplicationController
     redirect_to root_url
   end
 
+  def callback
+    session['uid'] = request.env["omniauth.auth"][:uid]
+  end
+
 end
 
 # auth = request.env['omniauth.auth']
