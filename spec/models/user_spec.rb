@@ -10,18 +10,70 @@ RSpec.describe User do
 
   before do
     user.follow_interest(socialinterest2)
-
-    OmniAuth.config.add_mock(:facebook, {:uid => '12345'})
-    '/auth/facebook'
   end
 
-  it "should return false if name is not present" do
-    expect(user.name).not_to be_nil
+
+  [:name, :email, :oauth_token].each do |field|
+    it "should return error if #{field} is nil" do
+      user.send("#{field}=".to_sym,nil)
+      expect(user.valid?).to be_falsey
+    end
   end
 
-  it "should return true if email is present" do
-    expect(user.email).not_to be_nil
-  end
+  # describe :update_uid do
+  #   before do
+  #     OmniAuth.config.mock_auth[:facebook] = OmniAuth::AuthHash.new({
+  #       provider: 'facebook',
+  #       info: {
+  #         name: 'first last',
+  #         email: 'test@gmail.com'
+  #       },
+  #       uid: '123456',
+  #       credentials: {
+  #         token: 'token',
+  #         expires_at: Time.now + 1.week
+  #       }
+  #     })
+  #   end
+  #
+  #   it 'test update ' do
+  #     auth = {}
+  #     info ={}
+  #     allow(auth).to receive(:info).and_return(info)
+  #     user.update_uid(auth)
+  #     expect(user.uid).to eq(23)
+  #   end
+  # end
+
+
+
+  describe :from_omniauth do
+    before do
+      OmniAuth.config.mock_auth[:facebook] = OmniAuth::AuthHash.new({
+        provider: 'facebook',
+        info: {
+          name: 'first last',
+          email: 'test@gmail.com'
+        },
+        uid: '12345',
+        credentials: {
+          token: 'token',
+          expires_at: Time.now + 1.week
+        }
+      })
+    end
+
+    it 'should check user validity' do
+      user = User.from_omniauth(OmniAuth.config.mock_auth[:facebook])
+      expect(user.valid?).to be_truthy
+    end
+
+    it 'should get all the user details from omniauth for successful authentication' do
+      user = User.from_omniauth(OmniAuth.config.mock_auth[:facebook])
+      expect(user.name).to eq('first last')
+      expect(user.email).to eq('test@gmail.com')
+    end
+ end
 
   it "associated causes should be destroyed on deletion" do
     # Issue.create!(title: "Title", content: "Content")
@@ -32,7 +84,6 @@ RSpec.describe User do
   end
 
   it "sets a session variable to the OmniAuth auth hash" do
-    byebug
     # expect(session['uid']).to equal('12345')
   end
 
