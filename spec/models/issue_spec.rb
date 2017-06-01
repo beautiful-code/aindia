@@ -29,9 +29,11 @@ RSpec.describe Issue do
 
   it "causes order should be most recent first"
   # do
-    # causes = user_with_causes.issues
-    # cause = user_with_causes.issues.first
-    # expect(causes(:most_recent)).to be_equal(cause)
+  #   byebug
+  #   causeslist = user_with_causes.issues
+  #   cause1 = user_with_causes.issues.first
+  #   cause2 = user_with_causes.issues.last
+  #   # expect(most_recent(causeslist)).to equal(cause)
   # end
 
 end
