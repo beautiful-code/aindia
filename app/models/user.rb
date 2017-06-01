@@ -1,6 +1,9 @@
 class User < ApplicationRecord
   has_many :issues, dependent: :destroy
   has_and_belongs_to_many :socialinterests, class_name: "SocialInterest"
+  validates :name, presence: true
+  validates :email, presence: true
+  validates :oauth_token, presence: true
 
   def self.from_omniauth(auth)
     #where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
@@ -16,6 +19,11 @@ class User < ApplicationRecord
       user.save!
     end
   end
+
+  # def update_uid(auth)
+  #   self.uid = auth.uid
+  #   save
+  # end
 
   def follow_interest(social_interest)
     socialinterests << social_interest
