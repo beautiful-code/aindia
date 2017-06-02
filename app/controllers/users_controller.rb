@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :redirect_if_logged_in, only: [:new, :create, :edit]
+  before_action :redirect_if_logged_in, only: [:new, :create]
   before_action :verify_user_has_logged_in, only: [:show]
   before_action :set_user, only: [:show]
 
@@ -14,6 +14,7 @@ class UsersController < ApplicationController
   end
 
   def edit
+    byebug
   end
 
   def update
