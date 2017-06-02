@@ -12,7 +12,6 @@ RSpec.describe User do
     user.follow_interest(socialinterest2)
   end
 
-
   [:name, :email, :oauth_token].each do |field|
     it "should return error if #{field} is nil" do
       user.send("#{field}=".to_sym,nil)
@@ -83,8 +82,19 @@ RSpec.describe User do
     # expect(causes.count).to be==0
   end
 
-  it "sets a session variable to the OmniAuth auth hash" do
-    # expect(session['uid']).to equal('12345')
+  describe :follow_interest do
+    it "should allow user to follow the interest" do
+      user.follow_interest(socialinterest3)
+      expect(user.is_following?(socialinterest3)).to be_truthy
+    end
+  end
+
+  describe :unfollow_interest do
+    it "should allow user to unfollow the interest" do
+      user.follow_interest(socialinterest3)
+      user.unfollow_interest(socialinterest3)
+      expect(user.is_following?(socialinterest3)).to be_falsey
+    end
   end
 
   describe :is_following? do
@@ -92,9 +102,8 @@ RSpec.describe User do
       expect(user.is_following? socialinterest2).to be_truthy
     end
 
-    it "should return true if user doesn't follow the interest" do
+    it "should return false if user doesn't follow the interest" do
       expect(user.is_following? socialinterest1).to be_falsey
     end
-
   end
 end
