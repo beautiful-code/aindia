@@ -8,13 +8,21 @@
         - issue.errors.full_messages.each do |message|
           %li= message
   .form-group
-    = f.label :title
-    = f.text_field :title, class: 'form-control'
+    - SocialInterest.all.each do |sinterest|
+      %label.checkbox-inline
+        %input{:type => "checkbox", :value => ""}>
+        #{sinterest.title}
   .form-group
-    = f.label :content
-    = f.text_area :content, class: 'form-control'
+    = f.label :title
+    = f.text_field :title, maxlength: 80, class: 'form-control'
   .form-group
     %span.picture
       = f.file_field :imageurl
   .form-group
-    = submit_tag 'Create Issue', class: "btn btn-primary"
+    = f.label :content
+    = f.text_area :content, maxlength: 400, :rows => 8, style: 'width:100%;', class: 'form-control'
+  .form-group
+    = f.label :impact
+    = f.text_field :impact, class: 'form-control'
+  .form-group
+    = submit_tag 'Post', class: "btn btn-primary pull-right"
