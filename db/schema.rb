@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170608073223) do
+ActiveRecord::Schema.define(version: 20170609060159) do
 
   create_table "issues", force: :cascade do |t|
     t.text     "content"
@@ -23,6 +23,11 @@ ActiveRecord::Schema.define(version: 20170608073223) do
     t.float    "cost"
     t.index ["user_id", "created_at"], name: "index_issues_on_user_id_and_created_at"
     t.index ["user_id"], name: "index_issues_on_user_id"
+  end
+
+  create_table "issues_social_interests", id: false, force: :cascade do |t|
+    t.integer "issue_id",           null: false
+    t.integer "social_interest_id", null: false
   end
 
   create_table "issues_users", id: false, force: :cascade do |t|
@@ -69,7 +74,6 @@ ActiveRecord::Schema.define(version: 20170608073223) do
     t.string   "email"
     t.date     "dob"
     t.string   "gender"
-    t.string   "city"
   end
 
 end

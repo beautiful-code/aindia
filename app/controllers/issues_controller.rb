@@ -7,7 +7,11 @@ class IssuesController < ApplicationController
   end
 
   def create
+    byebug
     @issue = current_user.issues.build(issue_params)
+    # To save the interest attributes
+    @issue.attributes = {'socialinterest_ids' => []}.merge(params[:issue] || {})
+
     if @issue.save
       flash[:success] = "Issue created!"
       redirect_to root_url
@@ -26,7 +30,7 @@ class IssuesController < ApplicationController
   private
 
     def issue_params
-      params.require(:issue).permit(:content, :imageurl, :user_id, :title)
+      params.require(:issue).permit(:content, :imageurl, :user_id, :title, :impact, :cost, :socialinterest_ids)
     end
 
     # verifying that the current user is the owner of the issue
