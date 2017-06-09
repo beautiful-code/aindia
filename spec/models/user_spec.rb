@@ -74,13 +74,21 @@ RSpec.describe User do
     end
  end
 
+describe :destroy do
   it "associated causes should be destroyed on deletion" do
-    # Issue.create!(title: "Title", content: "Content")
-    # tempuser.save
-    # causes = tempuser.issues
-    # tempuser.destroy
-    # expect(causes.count).to be==0
+    user.issues.create(title: "RANDOM", content: "RANDOM")
+    expect(socialinterest2.user_ids.include?(user.id)).to be_truthy
+
+ byebug
+    expect { user.destroy }.to change { User.count }.by(
+      -1
+    ).and change { Issue.count }.by(-1)
+
+    socialinterest2.reload
+
+    expect(socialinterest2.user_ids.include?(user.id)).to be_falsey
   end
+end
 
   describe :follow_interest do
     it "should allow user to follow the interest" do

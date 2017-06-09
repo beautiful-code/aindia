@@ -14,7 +14,6 @@ class UsersController < ApplicationController
   end
 
   def edit
-    byebug
   end
 
   def update
@@ -28,7 +27,6 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
-    user = User.find(params[:id])
     user.destroy
     flash[:success] = "User deleted"
 
@@ -51,9 +49,8 @@ class UsersController < ApplicationController
   end
 
 private
-
   def set_user
-    @user = User.find(params[:id])
+    @user = params[:id].present? ? User.find(params[:id]) : User.new(params[:user])
   end
 
   def user_params
@@ -63,5 +60,4 @@ private
   def redirect_if_logged_in
     redirect_to @current_user if logged_in?
   end
-
 end
