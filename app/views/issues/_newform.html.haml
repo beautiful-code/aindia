@@ -10,8 +10,8 @@
   .form-group
     - SocialInterest.all.each do |sinterest|
       %label.checkbox-inline
-        %input{:type => "checkbox", :value => ""}>
-        #{sinterest.title}
+        = check_box_tag :socialinterest_ids, sinterest.id, @issue.socialinterests.include?(sinterest), :name => "issue[socialinterest_ids][]"
+        = sinterest.title
   .form-group
     = f.label :title
     = f.text_field :title, maxlength: 80, class: 'form-control'
