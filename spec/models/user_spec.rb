@@ -74,19 +74,16 @@ RSpec.describe User do
     end
  end
 
-describe :destroy do
-  it "associated causes should be destroyed on deletion" do
-    user.issues.create(title: "RANDOM", content: "RANDOM")
-    expect(socialinterest2.user_ids.include?(user.id)).to be_truthy
+  describe :destroy do
+    it "associated causes should be destroyed on deletion" do
+      user.issues.create(title: "RANDOM", content: "RANDOM")
+      expect(socialinterest2.user_ids.include?(user.id)).to be_truthy
 
- byebug
-    expect { user.destroy }.to change { User.count }.by(
-      -1
-    ).and change { Issue.count }.by(-1)
-
-    socialinterest2.reload
-
-    expect(socialinterest2.user_ids.include?(user.id)).to be_falsey
+      expect { user.destroy }.to change { User.count }.by(
+        -1
+        ).and change { Issue.count }.by(-1)
+      socialinterest2.reload
+      expect(socialinterest2.user_ids.include?(user.id)).to be_falsey
   end
 end
 
