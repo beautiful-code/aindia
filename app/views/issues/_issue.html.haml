@@ -1,16 +1,16 @@
-%li{:id => "#{issue.id}"}
-  .container-fluid{:style => "border: 0.1px solid #dddddd; padding-top: 10px; border-radius: 5px" }
-    .form-group
-      - issue.socialinterests.each do |sinterest|
-        .chip
-          #{sinterest.title}
+.card{:id => "#{issue.id}"}
+  .form-group
+    - issue.socialinterests.each do |sinterest|
+      .chip
+        #{sinterest.title}
+    %span.pull-right
       #{time_ago_in_words(issue.created_at)} ago.
-    .form-group
-      = issue.title
-    .form-group
-      %span.content
-        = issue.content
-        = image_tag issue.imageurl.url if issue.imageurl?
-    - if current_user?(issue.user)
-      = link_to "delete", issue, method: :delete, |
-        data: { confirm: "You sure?" }                |
+  .form-group
+    = issue.title
+  .form-group
+    %span.content
+      = issue.content
+      = image_tag issue.imageurl.url if issue.imageurl?
+  - if current_user?(issue.user)
+    = link_to "delete", issue, method: :delete, |
+      data: { confirm: "You sure?" }                |
