@@ -7,7 +7,6 @@ class IssuesController < ApplicationController
   end
 
   def create
-    byebug
     @issue = current_user.issues.build(issue_params)
     # To save the interest attributes
     @issue.attributes = {'socialinterest_ids' => []}.merge(params[:issue] || {})

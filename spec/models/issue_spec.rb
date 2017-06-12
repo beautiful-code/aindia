@@ -29,7 +29,6 @@ RSpec.describe Issue do
 
   it "causes order should be most recent first"
   # do
-  #   byebug
   #   causeslist = user_with_causes.issues
   #   cause1 = user_with_causes.issues.first
   #   cause2 = user_with_causes.issues.last

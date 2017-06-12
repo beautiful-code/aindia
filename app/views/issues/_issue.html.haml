@@ -1,19 +1,16 @@
 %li{:id => "#{issue.id}"}
-  .container-fluid{:style => "border: 0.1px solid #dddddd;"}
+  .container-fluid{:style => "border: 0.1px solid #dddddd; padding-top: 10px; border-radius: 5px" }
     .form-group
-      %h3
-        = issue.title
+      - issue.socialinterests.each do |sinterest|
+        .chip
+          #{sinterest.title}
+      #{time_ago_in_words(issue.created_at)} ago.
+    .form-group
+      = issue.title
     .form-group
       %span.content
         = issue.content
         = image_tag issue.imageurl.url if issue.imageurl?
-    %span.timestamp
-      Posted #{time_ago_in_words(issue.created_at)} ago.
-      - if current_user?(issue.user)
-        = link_to "delete", issue, method: :delete, |
-          data: { confirm: "You sure?" }                |
-
-
-
-  -# = link_to image_for(issue.user, size: 50), issue.user
-  -# %span.user= link_to issue.user.name, issue.user
+    - if current_user?(issue.user)
+      = link_to "delete", issue, method: :delete, |
+        data: { confirm: "You sure?" }                |
