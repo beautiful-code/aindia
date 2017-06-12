@@ -14,7 +14,6 @@ class UsersController < ApplicationController
   end
 
   def edit
-    byebug
   end
 
   def update
