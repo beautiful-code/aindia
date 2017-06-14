@@ -5,7 +5,8 @@
       =f.date_field :dob, class: 'form-control'
     .form-group
       =f.label :gender, "Gender"
-      =f.select :gender, options_for_select([["Select", ""], "Male", "Female"], @current_user.gender), class: 'form-control'
+      .div
+        =f.select :gender, options_for_select([["Select", ""], "Male", "Female"], @current_user.gender), class: 'form-control'
 
     .form-group
       = submit_tag 'Update', class: "btn btn-primary"
