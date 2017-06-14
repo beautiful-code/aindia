@@ -6,15 +6,15 @@
     - issue.socialinterests.each do |sinterest|
       .chip
         #{sinterest.title}
-    %span.pull-right
-      .dropdown
-        %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-          %i.material-icons.edit-icon edit
-        %ul.dropdown-menu
-          %li= link_to "Edit", edit_issue_path(issue)
-          %li= link_to "Delete", issue, method: :delete, |
-        data: { confirm: "You sure?" }
-
+    - if current_user?(issue.user)
+      %span.pull-right
+        .dropdown
+          %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+            %i.material-icons.edit-icon edit
+          %ul.dropdown-menu
+            %li= link_to "Edit", edit_issue_path(issue)
+            %li= link_to "Delete", issue, method: :delete, |
+          data: { confirm: "You sure?" }
     %span.pull-right
       #{time_ago_in_words(issue.created_at)} ago.
   .form-group
