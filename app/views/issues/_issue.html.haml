@@ -1,16 +1,23 @@
+
+%head
+  %link{:href => "https://fonts.googleapis.com/icon?family=Material+Icons", :rel => "stylesheet"}
 .card{:id => "#{issue.id}"}
   .form-group
     - issue.socialinterests.each do |sinterest|
       .chip
         #{sinterest.title}
     %span.pull-right
+      -# = link_to "delete", issue, method: :delete, |
+      -#   data: { confirm: "You sure?" }
+      %li.material-icons.md-light= link_to "edit", edit_issue_path(issue)
+    %span.pull-right
       #{time_ago_in_words(issue.created_at)} ago.
   .form-group
     = issue.title
   .form-group
     %span.content
-      = issue.content
+      = issue.content.gsub(/\n/, '<br/>').html_safe
       = image_tag issue.imageurl.url if issue.imageurl?
-  - if current_user?(issue.user)
-    = link_to "delete", issue, method: :delete, |
-      data: { confirm: "You sure?" }                |
+  -# - if current_user?(issue.user)
+  -#   = link_to "delete", issue, method: :delete, |
+  -#     data: { confirm: "You sure?" }                |
