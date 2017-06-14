@@ -4,13 +4,15 @@
 <body>
 <header class="navbar navbar-fixed-top navbar-inverse">
   <div class="container">
-    <%= link_to "ADOPT INDIA", root_path, id: "logo" %>
+    <%= link_to "SOCIAL QUORA", root_path, id: "logo" %>
     <nav>
       <ul class="nav navbar-nav navbar-right">
 
+        <% if logged_in? %>
         <li><%= link_to "Create A Cause", new_issue_path %></li>
-        <li class="material-icons md-light"><%= link_to "home" %></li>
-        <!-- <li class="material-icons md-light"><%= link_to "help" %></li> -->
+        <% end %>
+        <li class="material-icons md-light"><%= link_to "home", root_path %></li>
+        <li class="material-icons md-light"><%= link_to "help" %></li>
 
         <% if logged_in? %>
         <li class="dropdown">

@@ -1,6 +1,6 @@
 ## About
 
-“Adopt India” is to connect people who are socially responsible and to support and encourage civic participation in solving social issues.  http://adoptindia.org/
+Social Quora is to connect people who are socially responsible and to support and encourage civic participation in solving social issues.  http://adoptindia.org/
 
 ## Developer Notes
 
@@ -22,11 +22,10 @@ Install the right ruby and rails versions - 2.4.0 (ruby) with rvm
 
 * Run "bundle install" to install the dependencies.
 * Run "rails s" to install the app on local host.
-* Run "rails db:migrate" 
+* Run "rails db:migrate"
 * Run "rails db:seed"
 
 
-## Test Steps 
+## Test Steps
 
 * TODO
-

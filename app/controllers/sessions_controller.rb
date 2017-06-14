@@ -4,8 +4,7 @@ class SessionsController < ApplicationController
     log_in(user)
 
     #session[:user_id] = user.id
-    #redirect_to root_path
-    redirect_to user
+    redirect_to root_path
   end
 
   def destroy
