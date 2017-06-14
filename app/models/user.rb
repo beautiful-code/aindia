@@ -4,6 +4,7 @@ class User < ApplicationRecord
   validates :name, presence: true
   validates :email, presence: true
   validates :oauth_token, presence: true
+  has_and_belongs_to_many :issues, class_name: "Issue"
 
   def self.from_omniauth(auth)
     #where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
@@ -35,5 +36,26 @@ class User < ApplicationRecord
 
   def is_following?(social_interest)
     socialinterests.include?(social_interest)
+  end
+
+  def support_issue(issue)
+    if self.is_supporting?(issue)
+      issues.delete(issue)
+    else
+      issues << issue
+    end
+  end
+
+  def is_supporting?(issue)
+    issues.include?(issue)
+  end
+
+  def get_support_button_text(issue)
+    s = 'Support'
+    if self.is_supporting?(issue)
+      s = 'Unsupport'
+    else
+      s = 'Support'
+    end
   end
 end
