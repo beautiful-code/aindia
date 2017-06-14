@@ -1,0 +1,20 @@
+.card{:id => "#{issue.id}"}
+  .form-group
+    - issue.socialinterests.each do |sinterest|
+      .chip
+        #{sinterest.title}
+    %span.pull-right
+      #{time_ago_in_words(issue.created_at)} ago.
+  .form-group
+    %b #{issue.title.humanize}
+  .form-group
+    %span.content
+      = issue.content.gsub(/\n/, '<br/>').html_safe
+  %div
+    = image_tag issue.imageurl.url if issue.imageurl?
+  %font{:color => "gray"} Raised By:
+  = link_to issue.user.name, user_path(issue.user)
+  %hr
+  = button_to issue.get_support_button_text
+
+  //, { action: "updatefollowinterests", interest_id: sinterest }
