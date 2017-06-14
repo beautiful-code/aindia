@@ -84,31 +84,6 @@ button {
     opacity: 1.0
  }
 
-material-icons {
-  font-family: 'Material Icons';
-  font-weight: bold;
-  font-style: normal;
-  font-size: 24px;  /* Preferred icon size */
-  display: inline-block;
-  line-height: 1;
-  text-transform: none;
-  letter-spacing: normal;
-  word-wrap: normal;
-  white-space: nowrap;
-  direction: ltr;
-
-  /* Support for all WebKit browsers. */
-  -webkit-font-smoothing: antialiased;
-  /* Support for Safari and Chrome. */
-  text-rendering: optimizeLegibility;
-
-  /* Support for Firefox. */
-  -moz-osx-font-smoothing: grayscale;
-
-  /* Support for IE. */
-  font-feature-settings: 'liga';
-}
-
 /* issues */
 
 .issues {
@@ -174,4 +149,14 @@ span.picture {
     border-radius: 10px;
     background-color: #f1f1f1;
     border-width: thick;
+}
+
+.edit-icon {
+  font-size: 20px;
+  color: gray;
+  margin-left: 20px;
+}
+
+.edit-icon:hover {
+  text-decoration: none;
 }

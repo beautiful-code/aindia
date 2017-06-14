@@ -24,7 +24,7 @@ class IssuesController < ApplicationController
 
     if @issue.save
       flash[:success] = "Issue created!"
-      redirect_to root_url
+      redirect_to user_path(@issue.user)
     else
       # flash[:success] = "Issue creation failed!"
       # redirect_to user_path
