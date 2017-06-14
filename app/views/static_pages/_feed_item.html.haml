@@ -12,8 +12,9 @@
       = issue.content.gsub(/\n/, '<br/>').html_safe
   %div
     = image_tag issue.imageurl.url if issue.imageurl?
-  %font{:color => "gray"} Raised By:
-  = link_to issue.user.name, user_path(issue.user)
+  %div
+    %font{:color => "gray"} Raised By:
+    = link_to issue.user.name, user_path(issue.user)
   %hr
   = button_to issue.get_support_button_text
 
