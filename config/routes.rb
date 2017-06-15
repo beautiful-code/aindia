@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   get 'static_pages/home'
   post 'static_pages/support_issue'
+  post 'users/support_issue'
 
   resources :users do
     member do

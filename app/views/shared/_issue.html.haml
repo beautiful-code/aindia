@@ -29,6 +29,4 @@
       %font{:color => "gray"} Raised By:
       = link_to issue.user.name, user_path(issue.user)
   %hr
-  = button_to @current_user.get_support_button_text(issue)
-
-  //, { action: "support_issue", issue_id: issue, user_id: @current_user}
+  = button_to @current_user.get_support_button_text(issue), { action: "support_issue", issue_id: issue, user_id: @current_user}
