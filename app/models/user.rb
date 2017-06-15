@@ -58,4 +58,9 @@ class User < ApplicationRecord
       s = 'Support'
     end
   end
+
+  def get_issues_based_on_my_interests
+    feed_items = Issue.includes(:social_interests).where(social_interests: { id: social_interests.pluck(:id) })
+  end
+
 end

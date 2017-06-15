@@ -3,7 +3,7 @@ class StaticPagesController < ApplicationController
 
   def home
     if logged_in?
-      @feed_items = Issue.all
+      @feed_items = @current_user.get_issues_based_on_my_interests
     end
   end
 
