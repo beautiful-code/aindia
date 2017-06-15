@@ -10,5 +10,5 @@
       %h3
         Causes (#{@user.issues.count})
       .issues
-        = render @issues
+        = render(partial: 'shared/issue', collection: @issues, as: 'issue', locals:  { from_profile: true } ) || "There's no ad to be displayed"
       = will_paginate @issues
