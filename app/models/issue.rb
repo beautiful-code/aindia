@@ -26,9 +26,4 @@ class Issue < ApplicationRecord
       s = 'Support'
     end
   end
-
-  # def self.get_issues_filtered_on_the_basis_users_interests(c_user)
-  #   c_user.
-  # end
-
 end

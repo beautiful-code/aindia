@@ -33,6 +33,6 @@
     = link_to "Support", { action: "support_issue", issue_id: issue, user_id: @current_user}, method: :post, class: "supported-button"
   - else
     = link_to "Support", { action: "support_issue", issue_id: issue, user_id: @current_user}, method: :post, class: "support-button"
-  = link_to issue.get_supported_users_count, { action: "support_issue", issue_id: issue, user_id: @current_user}, method: :post, class: "supported-button"
-  -# %button.btn.btn-info.btn-lg{"data-target" => "#myModal", "data-toggle" => "modal", :type => "button"} Open Modal
-  -# = render 'shared/supported_users_model'
+  - if issue.get_supported_users_count > 0
+    %a{"data-target" => "#SupportedUsersModal#{issue.id}", "data-toggle" => "modal", :type => "button", "class" => "supported-button" } #{issue.get_supported_users_count}
+    = render 'shared/supported_users_modal', issue: issue

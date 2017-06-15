@@ -1,0 +1,9 @@
+.modal.fade{:role => "dialog", :id => "SupportedUsersModal#{issue.id}"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"data-dismiss" => "modal", :type => "button"} ×
+        %h4.modal-title Supported Users
+      .modal-body
+        - issue.supported_users.each do |user|
+          %li= link_to user.name, user_path(user)
