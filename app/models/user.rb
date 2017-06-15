@@ -60,7 +60,11 @@ class User < ApplicationRecord
   end
 
   def get_issues_based_on_my_interests
-    feed_items = Issue.includes(:social_interests).where(social_interests: { id: social_interests.pluck(:id) })
+    if social_interests.count > 0
+      feed_items = Issue.includes(:social_interests).where(social_interests: { id: social_interests.pluck(:id) })
+    else
+      feed_items = Issue.all
+    end
   end
 
 end
