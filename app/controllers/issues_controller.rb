@@ -7,7 +7,7 @@ class IssuesController < ApplicationController
   end
 
   def save_attributes
-    @issue.attributes = {'socialinterest_ids' => []}.merge(params[:issue] || {})
+    @issue.attributes = {'social_interest_ids' => []}.merge(params[:issue] || {})
 
     if @issue.save
       flash[:success] = "Issue saved!"
@@ -20,7 +20,7 @@ class IssuesController < ApplicationController
 
   def create
     @issue = current_user.issues.build(issue_params)
-    @issue.attributes = {'socialinterest_ids' => []}.merge(params[:issue] || {})
+    @issue.attributes = {'social_interest_ids' => []}.merge(params[:issue] || {})
 
     if @issue.save
       flash[:success] = "Issue created!"

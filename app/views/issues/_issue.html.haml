@@ -3,7 +3,7 @@
   %link{:href => "https://fonts.googleapis.com/icon?family=Material+Icons", :rel => "stylesheet"}
 .card{:id => "#{issue.id}"}
   .form-group
-    - issue.socialinterests.each do |sinterest|
+    - issue.social_interests.each do |sinterest|
       .chip
         #{sinterest.title}
     - if current_user?(issue.user)

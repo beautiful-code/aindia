@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   has_many :issues, dependent: :destroy # created issues
-  has_and_belongs_to_many :socialinterests, class_name: "SocialInterest"
+  has_and_belongs_to_many :social_interests, class_name: "SocialInterest"
   validates :name, presence: true
   validates :email, presence: true
   validates :oauth_token, presence: true
@@ -27,15 +27,15 @@ class User < ApplicationRecord
   # end
 
   def follow_interest(social_interest)
-    socialinterests << social_interest
+    social_interests << social_interest
   end
 
   def unfollow_interest(social_interest)
-    socialinterests.delete(social_interest)
+    social_interests.delete(social_interest)
   end
 
   def is_following?(social_interest)
-    socialinterests.include?(social_interest)
+    social_interests.include?(social_interest)
   end
 
   def support_issue(issue)

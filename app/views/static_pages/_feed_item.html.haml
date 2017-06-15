@@ -1,6 +1,6 @@
 .card{:id => "#{issue.id}"}
   .form-group
-    - issue.socialinterests.each do |sinterest|
+    - issue.social_interests.each do |sinterest|
       .chip
         #{sinterest.title}
     %span.pull-right

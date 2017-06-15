@@ -10,7 +10,7 @@
   .form-group
     - SocialInterest.all.each do |sinterest|
       %label.checkbox-inline
-        = check_box_tag :socialinterest_ids, sinterest.id, @issue.socialinterests.include?(sinterest), :name => "issue[socialinterest_ids][]"
+        = check_box_tag :social_interest_ids, sinterest.id, @issue.social_interests.include?(sinterest), :name => "issue[social_interest_ids][]"
         = sinterest.title
   .form-group
     = f.label :title
