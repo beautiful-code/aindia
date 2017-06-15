@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 data = YAML.load_file 'config/socialinterests.yml'
-data['socialinterests'].each do |sinterest|
+data['social_interests'].each do |sinterest|
   title = sinterest["title"]
   description = sinterest["description"]
   imageurl = sinterest["image_url"]

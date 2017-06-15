@@ -1,6 +1,6 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-socialinterests:
+social_interests:
   -
       title: Education
       description: School ends, but education doesn't.
