@@ -15,7 +15,6 @@ RSpec.describe SocialInterest do
   end
 
   it "should increment the followers count by 1 if user follows an interest" do
-    byebug
     cnt = socialinterest2.users.count
     user.follow_interest(socialinterest2)
     expect(socialinterest2.users.count).to be == cnt + 1

@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe User do
   let(:user) { FactoryGirl.create(:user) }
   let(:tempuser) { FactoryGirl.create(:user) }
+  let(:user_with_causes) { FactoryGirl.create(:user_with_issues) }
 
   let(:socialinterest1) { FactoryGirl.create(:social_interest) }
   let(:socialinterest2) { FactoryGirl.create(:social_interest) }
@@ -92,7 +93,7 @@ RSpec.describe User do
   describe :unfollow_interest do
     it "should allow user to unfollow the interest" do
       user.follow_interest(socialinterest3)
-      user.unfollow_interest(socialinterest3) #unfollows the interest when you call it again.
+      user.unfollow_interest(socialinterest3)
       expect(user.is_following?(socialinterest3)).to be_falsey
     end
   end
@@ -106,4 +107,31 @@ RSpec.describe User do
       expect(user.is_following? socialinterest1).to be_falsey
     end
   end
+
+  describe :support_issue do
+    it "should support user to support the issue" do
+      issue = user_with_causes.issues.first
+      user.update_follow_interests(issue)
+      expect(user.is_supporting?(issue)).to be_truthy
+    end
+  end
+
+  describe :unsupport_issue do
+    it "should allow user to unsupport the issue" do
+      issue = user_with_causes.issues.first
+      user.support_issue(issue)
+      user.unsupport_issue(issue)
+      expect(user.is_supporting?(issue)).to be_falsey
+    end
+  end
+
+  describe :is_supporting? do
+    it "should return true if user supports the issue" do
+      issue = user_with_causes.issues.first
+      user.support_issue(issue)
+
+      expect(user.is_supporting? issue).to be_truthy
+    end
+  end
+
 end
