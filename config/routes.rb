@@ -9,8 +9,8 @@ Rails.application.routes.draw do
   post 'users/:id/followinterest/:interest_id', to: 'users#update_follow_interests', as: :follow_interest
 
   get 'static_pages/home'
-  post 'static_pages/support_issue'
-  post 'users/support_issue'
+  post 'static_pages/update_support_issue'
+  post 'users/update_support_issue'
 
   resources :users do
     member do

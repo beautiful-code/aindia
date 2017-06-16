@@ -26,32 +26,51 @@ class User < ApplicationRecord
   #   save
   # end
 
-  def follow_interest(social_interest)
-    if is_following?(social_interest)
-      social_interests.delete(social_interest)
-    else
-      social_interests << social_interest
-    end
-  end
 
+  # Following Interests methods
   def is_following?(social_interest)
     social_interests.include?(social_interest)
   end
 
-  def support_issue(issue)
-    if self.is_supporting?(issue)
-      supported_issues.delete(issue)
+  def update_follow_interests(social_interest)
+    if is_following?(social_interest)
+      unfollow_interest(social_interest)
     else
-      supported_issues << issue
+      follow_interest(social_interest)
     end
   end
+
+  def follow_interest(social_interest)
+    social_interests << social_interest
+  end
+
+  def unfollow_interest(social_interest)
+    social_interests.delete(social_interest)
+  end
+
+  # Support Issue methods
 
   def is_supporting?(issue)
     supported_issues.include?(issue)
   end
 
+  def update_support_issue(issue)
+    if self.is_supporting?(issue)
+      unsupport_issue(issue)
+    else
+      support_issue(issue)
+    end
+  end
+
+  def support_issue(issue)
+    supported_issues << issue
+  end
+
+  def unsupport_issue(issue)
+    supported_issues.delete(issue)
+  end
+
   def get_support_button_text(issue)
-    s = 'Support'
     if self.is_supporting?(issue)
       s = 'Unsupport'
     else
