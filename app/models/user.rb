@@ -27,11 +27,11 @@ class User < ApplicationRecord
   # end
 
   def follow_interest(social_interest)
-    social_interests << social_interest
-  end
-
-  def unfollow_interest(social_interest)
-    social_interests.delete(social_interest)
+    if is_following?(social_interest)
+      social_interests.delete(social_interest)
+    else
+      social_interests << social_interest
+    end
   end
 
   def is_following?(social_interest)

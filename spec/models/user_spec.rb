@@ -92,7 +92,7 @@ RSpec.describe User do
   describe :unfollow_interest do
     it "should allow user to unfollow the interest" do
       user.follow_interest(socialinterest3)
-      user.unfollow_interest(socialinterest3)
+      user.follow_interest(socialinterest3) #unfollows the interest when you call it again.
       expect(user.is_following?(socialinterest3)).to be_falsey
     end
   end

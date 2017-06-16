@@ -40,13 +40,10 @@ class UsersController < ApplicationController
     puts("interests called")
   end
 
-  def updatefollowinterests
+  def update_follow_interests
     interest = SocialInterest.find(params[:interest_id])
-    if @current_user.is_following?(interest)
-      @current_user.unfollow_interest(interest)
-    else
-      @current_user.follow_interest(interest)
-    end
+    @current_user.follow_interest(interest)
+
     puts("update called")
     redirect_to :back
   end

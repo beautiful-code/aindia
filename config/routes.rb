@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get 'sessions/create'
   delete '/logout',  to: 'sessions#destroy'
   put 'select_interests', to: 'users#selectinterests', as: :select_interests
-  post 'users/:id/followinterest/:interest_id', to: 'users#updatefollowinterests', as: :follow_interest
+  post 'users/:id/followinterest/:interest_id', to: 'users#update_follow_interests', as: :follow_interest
 
   get 'static_pages/home'
   post 'static_pages/support_issue'
