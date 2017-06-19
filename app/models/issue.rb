@@ -18,12 +18,4 @@ class Issue < ApplicationRecord
   def get_supported_users_count
     ret = supported_users.count
   end
-
-  def get_support_button_text(suser)
-    if is_supported_by_user(suser)
-      s = 'Unsupport'
-    else
-      s = 'Support'
-    end
-  end
 end

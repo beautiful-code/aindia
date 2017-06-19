@@ -70,14 +70,6 @@ class User < ApplicationRecord
     supported_issues.delete(issue)
   end
 
-  def get_support_button_text(issue)
-    if self.is_supporting?(issue)
-      s = 'Unsupport'
-    else
-      s = 'Support'
-    end
-  end
-
   def get_issues_based_on_my_interests
     if social_interests.count > 0
       feed_items = Issue.includes(:social_interests).where(social_interests: { id: social_interests.pluck(:id) })
