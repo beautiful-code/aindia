@@ -4,6 +4,11 @@ FactoryGirl.define do
     content Faker::Lorem.characters(20)
   end
 
+  factory :social_interest do
+    title Faker::Name.name
+    description Faker::Lorem.characters(30)
+  end
+
   # factory :user do
   #   name Faker::Name.name
   #   email Faker::Internet.email
@@ -28,8 +33,4 @@ FactoryGirl.define do
     end
   end
 
-  factory :social_interest do
-    title Faker::Name.name
-    description Faker::Lorem.characters(30)
-  end
 end

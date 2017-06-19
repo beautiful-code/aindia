@@ -10,7 +10,7 @@ RSpec.describe User do
   let(:socialinterest3) { FactoryGirl.create(:social_interest) }
 
   before do
-    user.follow_interest(socialinterest2)
+    user.update_follow_interests(socialinterest2)
   end
 
   [:name, :email, :oauth_token].each do |field|
@@ -93,7 +93,7 @@ RSpec.describe User do
   describe :unfollow_interest do
     it "should allow user to unfollow the interest" do
       user.follow_interest(socialinterest3)
-      user.unfollow_interest(socialinterest3)
+      user.update_follow_interests(socialinterest3)
       expect(user.is_following?(socialinterest3)).to be_falsey
     end
   end
@@ -111,7 +111,7 @@ RSpec.describe User do
   describe :support_issue do
     it "should support user to support the issue" do
       issue = user_with_causes.issues.first
-      user.update_follow_interests(issue)
+      user.update_support_issue(issue)
       expect(user.is_supporting?(issue)).to be_truthy
     end
   end
@@ -120,7 +120,7 @@ RSpec.describe User do
     it "should allow user to unsupport the issue" do
       issue = user_with_causes.issues.first
       user.support_issue(issue)
-      user.unsupport_issue(issue)
+      user.update_support_issue(issue)
       expect(user.is_supporting?(issue)).to be_falsey
     end
   end
@@ -131,6 +131,18 @@ RSpec.describe User do
       user.support_issue(issue)
 
       expect(user.is_supporting? issue).to be_truthy
+    end
+  end
+
+  describe :get_issues_based_on_my_interests do
+    it "should return all the causes in feed if user is not following any interests" do
+      count = user_with_causes.issues.count
+      expect(tempuser.get_issues_based_on_my_interests.count).to be_equal(count)
+    end
+
+    it "should return zero causes in feed if following any social interest" do
+      tempuser.follow_interest(socialinterest1)
+      expect(tempuser.get_issues_based_on_my_interests.count).to be_equal(0)
     end
   end
 
