@@ -13,8 +13,7 @@ class IssuesController < ApplicationController
       flash[:success] = "Issue saved!"
       redirect_to user_path(@issue.user)
     else
-      # flash[:success] = "Issue creation failed!"
-      # redirect_to user_path
+      render 'edit'
     end
   end
 
