@@ -27,8 +27,6 @@ class IssuesController < ApplicationController
       redirect_to user_path(@issue.user)
     else
       render 'new'
-      # flash[:success] = "Issue creation failed!"
-      # redirect_to user_path
     end
   end
 
