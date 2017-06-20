@@ -24,7 +24,7 @@ end
 
 # Returns true if the user is logged in, false otherwise.
 def logged_in?
-  !@current_user.nil?
+  @current_user.present?
 end
 
 def log_out

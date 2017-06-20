@@ -6,9 +6,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show]
 
   def new
-    if logged_in?
-      redirect_to user
-    end
+    redirect_to user if logged_in?
   end
 
   def show

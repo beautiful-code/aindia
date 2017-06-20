@@ -48,12 +48,12 @@ class IssuesController < ApplicationController
   private
 
     def issue_params
-      params.require(:issue).permit(:content, :imageurl, :user_id, :title, :impact, :cost, :socialinterest_ids)
+      params.require(:issue).permit(:content, :imageurl, :title, :impact, :cost, :socialinterest_ids)
     end
 
     # verifying that the current user is the owner of the issue
     def verify_current_user_is_owner
-      @issue = current_user.issues.find_by(id: params[:id])
+      @issue = current_user.issues.find(id: params[:id])
       redirect_to root_url if @issue.nil?
     end
 
