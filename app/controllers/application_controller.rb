@@ -3,9 +3,10 @@ class ApplicationController < ActionController::Base
   before_action :current_user
   include SessionsHelper
 
-private
+  private
+
   def signed_in?
-    !!current_user
+    current_user
   end
 
   helper_method :current_user, :signed_in?
@@ -22,5 +23,4 @@ private
       redirect_to root_url
     end
   end
-
 end

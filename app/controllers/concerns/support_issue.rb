@@ -1,9 +1,9 @@
 module SupportIssue
-    extend ActiveSupport::Concern
+  extend ActiveSupport::Concern
 
-    def update_support_issue
-      issue = Issue.find(params[:issue_id])
-      @current_user.update_support_issue(issue)
-      redirect_to :back
-    end
+  def update_support_issue
+    issue = Issue.find(params[:issue_id])
+    @current_user.update_support_issue(issue)
+    redirect_to :back
+  end
 end

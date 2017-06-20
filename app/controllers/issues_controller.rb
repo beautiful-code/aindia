@@ -1,16 +1,20 @@
+# frozen_string_literal: true
+
 class IssuesController < ApplicationController
-  before_action :verify_user_has_logged_in, only: [:new, :create, :destroy]
-  before_action :verify_current_user_is_owner,   only: [:destroy, :edit]
+  before_action :verify_user_has_logged_in, only: %i[new create destroy]
+  before_action :verify_current_user_is_owner, only: %i[destroy edit]
 
   def new
     @issue = Issue.new
   end
 
   def save_attributes
-    @issue.attributes = {'social_interest_ids' => []}.merge(params[:issue] || {})
+    @issue.attributes = {
+      'social_interest_ids' => []
+    }.merge(params[:issue] || {})
 
     if @issue.save
-      flash[:success] = "Issue saved!"
+      flash[:success] = 'Issue saved!'
       redirect_to user_path(@issue.user)
     else
       render 'edit'
@@ -19,10 +23,12 @@ class IssuesController < ApplicationController
 
   def create
     @issue = current_user.issues.build(issue_params)
-    @issue.attributes = {'social_interest_ids' => []}.merge(params[:issue] || {})
+    @issue.attributes = {
+      'social_interest_ids' => []
+    }.merge(params[:issue] || {})
 
     if @issue.save
-      flash[:success] = "Issue created!"
+      flash[:success] = 'Issue created!'
       redirect_to user_path(@issue.user)
     else
       render 'new'
@@ -31,13 +37,12 @@ class IssuesController < ApplicationController
 
   def destroy
     @issue.destroy
-    flash[:success] = "Issue deleted"
+    flash[:success] = 'Issue deleted'
     redirect_to @current_user
   end
 
   def edit
     @issue = Issue.find(params[:id])
-
   end
 
   def update
@@ -47,14 +52,15 @@ class IssuesController < ApplicationController
 
   private
 
-    def issue_params
-      params.require(:issue).permit(:content, :imageurl, :title, :impact, :cost, :socialinterest_ids)
-    end
+  def issue_params
+    params.require(:issue).permit(
+      %i[content imageurl title impact cost socialinterest_ids]
+    )
+  end
 
-    # verifying that the current user is the owner of the issue
-    def verify_current_user_is_owner
-      @issue = current_user.issues.find(id: params[:id])
-      redirect_to root_url if @issue.nil?
-    end
-
+  # verifying that the current user is the owner of the issue
+  def verify_current_user_is_owner
+    @issue = current_user.issues.find(id: params[:id])
+    redirect_to root_url if @issue.nil?
+  end
 end
