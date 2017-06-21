@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.config.middleware.use OmniAuth::Builder do
   provider :facebook, '411577782547034', 'cddd51af47e5c306e61afdab2df351c2'
 end
