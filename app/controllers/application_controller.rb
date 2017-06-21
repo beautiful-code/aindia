@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :current_user
@@ -19,7 +21,7 @@ class ApplicationController < ActionController::Base
   def verify_user_has_logged_in
     unless logged_in?
       store_location
-      flash[:danger] = "Please log in."
+      flash[:danger] = 'Please log in.'
       redirect_to root_url
     end
   end

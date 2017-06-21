@@ -1,9 +1,9 @@
+# frozen_string_literal: true
+
 class SessionsController < ApplicationController
   def create
-    user = User.from_omniauth(request.env["omniauth.auth"])
+    user = User.from_omniauth(request.env['omniauth.auth'])
     log_in(user)
-
-    #session[:user_id] = user.id
     redirect_to root_path
   end
 
@@ -13,9 +13,8 @@ class SessionsController < ApplicationController
   end
 
   def callback
-    session['uid'] = request.env["omniauth.auth"][:uid]
+    session['uid'] = request.env['omniauth.auth'][:uid]
   end
-
 end
 
 # auth = request.env['omniauth.auth']
