@@ -2,16 +2,16 @@
 
 class User < ApplicationRecord
   has_many :issues, dependent: :destroy # created issues
-  has_and_belongs_to_many :social_interests, class_name: "SocialInterest"
+  has_and_belongs_to_many :social_interests, class_name: 'SocialInterest'
   validates :name, presence: true
   validates :email, presence: true
   validates :oauth_token, presence: true
-  has_and_belongs_to_many :supported_issues, class_name: "Issue" # supported issues
+  has_and_belongs_to_many :supported_issues, class_name: 'Issue'
+  # supported issues
 
   def self.from_omniauth(auth)
-    #where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
+    # where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
     where(provider: auth.provider, uid: auth.uid).first_or_initialize do |user|
-
       user.provider = auth.provider
       user.uid = auth.uid
       user.name = auth.info.name
@@ -28,14 +28,13 @@ class User < ApplicationRecord
   #   save
   # end
 
-
   # Following Interests methods
-  def is_following?(social_interest)
+  def following?(social_interest)
     social_interests.include?(social_interest)
   end
 
   def update_follow_interests(social_interest)
-    if is_following?(social_interest)
+    if following?(social_interest)
       unfollow_interest(social_interest)
     else
       follow_interest(social_interest)
@@ -52,12 +51,12 @@ class User < ApplicationRecord
 
   # Support Issue methods
 
-  def is_supporting?(issue)
+  def supporting?(issue)
     supported_issues.include?(issue)
   end
 
   def update_support_issue(issue)
-    if self.is_supporting?(issue)
+    if supporting?(issue)
       unsupport_issue(issue)
     else
       support_issue(issue)
@@ -72,11 +71,14 @@ class User < ApplicationRecord
     supported_issues.delete(issue)
   end
 
-  def get_issues_based_on_my_interests
-    if social_interests.count > 0
-      feed_items = Issue.includes(:social_interests).where(social_interests: { id: social_interests.pluck(:id) })
+  def issues_based_on_my_interests
+    if social_interests.count.positive?
+      Issue.includes(:social_interests).where(social_interests:
+        {
+          id: social_interests.pluck(:id)
+        })
     else
-      feed_items = Issue.all
+      Issue.all
     end
   end
 end

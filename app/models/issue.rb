@@ -9,15 +9,15 @@ class Issue < ApplicationRecord
 
   validates :user_id, presence: true
   validates :title, presence: true, length: { maximum: 140 }
-  validates :content, presence: true, length: { maximum: 20000 }
-  has_and_belongs_to_many :social_interests, class_name: "SocialInterest"
-  has_and_belongs_to_many :supported_users, class_name: "User"
+  validates :content, presence: true, length: { maximum: 20_000 }
+  has_and_belongs_to_many :social_interests, class_name: 'SocialInterest'
+  has_and_belongs_to_many :supported_users, class_name: 'User'
 
-  def is_supported_by_user?(suser)
+  def supported_by_user?(suser)
     supported_users.include?(suser)
   end
 
-  def get_supported_users_count
-    ret = supported_users.count
+  def supported_users_count
+    supported_users.count
   end
 end

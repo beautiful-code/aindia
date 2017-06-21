@@ -1,7 +1,7 @@
 class Authorization < ApplicationRecord
   belongs_to :user
   validates :user_id, :uid, :provider, presence: true
-  validates_uniqueness_of :uid, :scope => :provider
+  validates_uniqueness_of :uid, scope: :provider
 end
 
 def self.find_from_hash(hash)

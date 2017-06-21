@@ -26,13 +26,13 @@ RSpec.describe SocialInterest do
     expect(socialinterest1.users.count).to be == 0
   end
 
-  describe :is_following? do
+  describe :following? do
     it 'should return true if user follows the interest' do
-      expect(user.is_following?(socialinterest2)).to be_truthy
+      expect(user.following?(socialinterest2)).to be_truthy
     end
 
     it 'should return true if user doesn\'t follow the interest' do
-      expect(user.is_following?(socialinterest1)).to be_falsey
+      expect(user.following?(socialinterest1)).to be_falsey
     end
   end
 end

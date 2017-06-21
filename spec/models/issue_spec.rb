@@ -34,9 +34,9 @@ RSpec.describe Issue do
 
   it 'should have non-zero supporting users for a cause' do
     cause = user_with_causes.issues.first
-    expect(cause.get_supported_users_count).to equal(1)
+    expect(cause.supported_users_count).to equal(1)
 
-    expect(cause.is_supported_by_user?(user2)).to be_truthy
+    expect(cause.supported_by_user?(user2)).to be_truthy
   end
 
   it 'causes order should be most recent first'

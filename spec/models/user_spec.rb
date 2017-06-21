@@ -87,7 +87,7 @@ RSpec.describe User do
   describe :follow_interest do
     it 'should allow user to follow the interest' do
       user.follow_interest(socialinterest3)
-      expect(user.is_following?(socialinterest3)).to be_truthy
+      expect(user.following?(socialinterest3)).to be_truthy
     end
   end
 
@@ -95,17 +95,17 @@ RSpec.describe User do
     it 'should allow user to unfollow the interest' do
       user.follow_interest(socialinterest3)
       user.update_follow_interests(socialinterest3)
-      expect(user.is_following?(socialinterest3)).to be_falsey
+      expect(user.following?(socialinterest3)).to be_falsey
     end
   end
 
-  describe :is_following? do
+  describe :following? do
     it 'should return true if user follows the interest' do
-      expect(user.is_following?(socialinterest2)).to be_truthy
+      expect(user.following?(socialinterest2)).to be_truthy
     end
 
     it 'should return false if user doesn\'t follow the interest' do
-      expect(user.is_following?(socialinterest1)).to be_falsey
+      expect(user.following?(socialinterest1)).to be_falsey
     end
   end
 
@@ -113,7 +113,7 @@ RSpec.describe User do
     it 'should support user to support the issue' do
       issue = user_with_causes.issues.first
       user.update_support_issue(issue)
-      expect(user.is_supporting?(issue)).to be_truthy
+      expect(user.supporting?(issue)).to be_truthy
     end
   end
 
@@ -122,29 +122,29 @@ RSpec.describe User do
       issue = user_with_causes.issues.first
       user.support_issue(issue)
       user.update_support_issue(issue)
-      expect(user.is_supporting?(issue)).to be_falsey
+      expect(user.supporting?(issue)).to be_falsey
     end
   end
 
-  describe :is_supporting? do
+  describe :supporting? do
     it 'should return true if user supports the issue' do
       issue = user_with_causes.issues.first
       user.support_issue(issue)
 
-      expect(user.is_supporting?(issue)).to be_truthy
+      expect(user.supporting?(issue)).to be_truthy
     end
   end
 
-  describe :get_issues_based_on_my_interests do
+  describe :issues_based_on_my_interests do
     it 'should return all the causes in feed if user is not following
         any interests' do
       count = user_with_causes.issues.count
-      expect(tempuser.get_issues_based_on_my_interests.count).to be_equal(count)
+      expect(tempuser.issues_based_on_my_interests.count).to be_equal(count)
     end
 
     it 'should return zero causes in feed if following any social interest' do
       tempuser.follow_interest(socialinterest1)
-      expect(tempuser.get_issues_based_on_my_interests.count).to be_equal(0)
+      expect(tempuser.issues_based_on_my_interests.count).to be_equal(0)
     end
   end
 end
