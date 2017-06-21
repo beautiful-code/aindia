@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryGirl.define do
   factory :issue do
     title Faker::Name.name
@@ -20,7 +22,7 @@ FactoryGirl.define do
     name Faker::Name.name
     email Faker::Internet.email
     oauth_token Faker::Lorem.characters(30)
-    gender "Male"
+    gender 'Male'
 
     factory :user_with_issues do
       transient do
@@ -32,5 +34,4 @@ FactoryGirl.define do
       end
     end
   end
-
 end

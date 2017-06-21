@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   has_many :issues, dependent: :destroy # created issues
   has_and_belongs_to_many :social_interests, class_name: "SocialInterest"
@@ -77,5 +79,4 @@ class User < ApplicationRecord
       feed_items = Issue.all
     end
   end
-
 end

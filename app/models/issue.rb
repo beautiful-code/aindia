@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Issue < ApplicationRecord
   belongs_to :user
   # TODO: belongs_to :leader, :class_name => "User"
