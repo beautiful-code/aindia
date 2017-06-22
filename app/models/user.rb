@@ -27,11 +27,6 @@ class User < ApplicationRecord
     self.email = auth.info.email
   end
 
-  # def update_uid(auth)
-  #   self.uid = auth.uid
-  #   save
-  # end
-
   # Following Interests methods
   def following?(social_interest)
     social_interests.include?(social_interest)

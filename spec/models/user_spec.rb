@@ -22,31 +22,6 @@ RSpec.describe User do
     end
   end
 
-  # describe :update_uid do
-  #   before do
-  #     OmniAuth.config.mock_auth[:facebook] = OmniAuth::AuthHash.new({
-  #       provider: 'facebook',
-  #       info: {
-  #         name: 'first last',
-  #         email: 'test@gmail.com'
-  #       },
-  #       uid: '123456',
-  #       credentials: {
-  #         token: 'token',
-  #         expires_at: Time.now + 1.week
-  #       }
-  #     })
-  #   end
-  #
-  #   it 'test update ' do
-  #     auth = {}
-  #     info ={}
-  #     allow(auth).to receive(:info).and_return(info)
-  #     user.update_uid(auth)
-  #     expect(user.uid).to eq(23)
-  #   end
-  # end
-
   describe :from_omniauth do
     before do
       OmniAuth.config.mock_auth[:facebook] = OmniAuth::AuthHash.new(
@@ -133,6 +108,11 @@ RSpec.describe User do
 
       expect(user.supporting?(issue)).to be_truthy
     end
+
+    it 'should return false if user doesn\'t support the issue' do
+      issue = user_with_causes.issues.first
+      expect(user.supporting?(issue)).to be_falsey
+    end
   end
 
   describe :issues_based_on_my_interests do
@@ -142,9 +122,13 @@ RSpec.describe User do
       expect(tempuser.issues_based_on_my_interests.count).to be_equal(count)
     end
 
-    it 'should return zero causes in feed if following any social interest' do
+    it 'should return only causes with social interest in feed if following
+        any social interest' do
       tempuser.follow_interest(socialinterest1)
-      expect(tempuser.issues_based_on_my_interests.count).to be_equal(0)
+      count = socialinterest1.issues.count
+      expect(tempuser.issues_based_on_my_interests.count).to be_equal(count)
+
+      # Object comparison is the ideal logic here.
     end
   end
 end

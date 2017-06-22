@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   include SupportIssue
 
   before_action :redirect_if_logged_in, only: %i[new create]
-  before_action :verify_user_has_logged_in, only: [:show]
+  skip_before_action :verify_user_has_logged_in, except: [:show]
   before_action :set_user, only: [:show]
 
   def new

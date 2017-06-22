@@ -1,24 +1,10 @@
 # frozen_string_literal: true
 
 class IssuesController < ApplicationController
-  before_action :verify_user_has_logged_in, only: %i[new create destroy]
-  before_action :verify_current_user_is_owner, only: %i[destroy edit]
+  before_action :verify_current_user_is_owner, only: %i[destroy edit update]
 
   def new
     @issue = Issue.new
-  end
-
-  def save_attributes
-    @issue.attributes = {
-      'social_interest_ids' => []
-    }.merge(params[:issue] || {})
-
-    if @issue.save
-      flash[:success] = 'Issue saved!'
-      redirect_to user_path(@issue.user)
-    else
-      render 'edit'
-    end
   end
 
   def create
@@ -36,18 +22,15 @@ class IssuesController < ApplicationController
   end
 
   def destroy
-    @issue.destroy
+    return unless @issue.destroy
     flash[:success] = 'Issue deleted'
     redirect_to @current_user
   end
 
-  def edit
-    @issue = Issue.find(params[:id])
-  end
+  def edit;  end
 
   def update
-    @issue = Issue.find(params[:id])
-    save_attributes
+    update_attributes
   end
 
   private
@@ -56,6 +39,19 @@ class IssuesController < ApplicationController
     params.require(:issue).permit(
       %i[content imageurl title impact cost socialinterest_ids]
     )
+  end
+
+  def update_attributes
+    @issue.attributes = {
+      'social_interest_ids' => []
+    }.merge(params[:issue] || {})
+
+    if @issue.save
+      flash[:success] = 'Issue saved!'
+      redirect_to user_path(@issue.user)
+    else
+      render 'edit'
+    end
   end
 
   # verifying that the current user is the owner of the issue
