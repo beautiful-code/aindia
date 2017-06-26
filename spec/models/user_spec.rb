@@ -52,11 +52,10 @@ RSpec.describe User do
   end
 
   it 'associated causes should be destroyed on deletion' do
-    # Issue.create!(title: "Title", content: "Content")
-    # tempuser.save
-    # causes = tempuser.issues
-    # tempuser.destroy
-    # expect(causes.count).to be==0
+    count = user_with_causes.issues.count
+    total_count = Issue.all.count
+    user_with_causes.destroy
+    expect(Issue.all.count).to equal(total_count - count)
   end
 
   describe :follow_interest do
@@ -86,32 +85,31 @@ RSpec.describe User do
 
   describe :support_issue do
     it 'should support user to support the issue' do
-      issue = user_with_causes.issues.first
-      user.update_support_issue(issue)
-      expect(user.supporting?(issue)).to be_truthy
+      cause = user_with_causes.issues.first
+      user.update_support_issue(cause)
+      expect(user.supporting?(cause)).to equal(true)
     end
   end
 
   describe :unsupport_issue do
     it 'should allow user to unsupport the issue' do
-      issue = user_with_causes.issues.first
-      user.support_issue(issue)
-      user.update_support_issue(issue)
-      expect(user.supporting?(issue)).to be_falsey
+      cause = user_with_causes.issues.first
+      user.support_issue(cause)
+      user.update_support_issue(cause)
+      expect(user.supporting?(cause)).to equal(false)
     end
   end
 
   describe :supporting? do
     it 'should return true if user supports the issue' do
-      issue = user_with_causes.issues.first
-      user.support_issue(issue)
-
-      expect(user.supporting?(issue)).to be_truthy
+      cause = user_with_causes.issues.first
+      user.support_issue(cause)
+      expect(user.supporting?(cause)).to equal(true)
     end
 
     it 'should return false if user doesn\'t support the issue' do
-      issue = user_with_causes.issues.first
-      expect(user.supporting?(issue)).to be_falsey
+      cause = user_with_causes.issues.first
+      expect(user.supporting?(cause)).to equal(false)
     end
   end
 

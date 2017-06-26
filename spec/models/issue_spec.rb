@@ -9,21 +9,21 @@ RSpec.describe Issue do
 
   %i[user_id title content].each do |field|
     it 'should return error if #{field} is nil' do
-      issue = user_with_causes.issues.last
-      issue.send("#{field}=".to_sym, nil)
-      expect(issue.valid?).to be_falsey
+      cause = user_with_causes.issues.last
+      cause.send("#{field}=".to_sym, nil)
+      expect(cause.valid?).to equal(false)
     end
   end
 
   it 'should be valid' do
     cause = user_with_causes.issues.first
-    expect(cause.valid?).to be_truthy
+    expect(cause.valid?).to equal(true)
   end
 
   it 'should be invalid if content is more than 20,000 chars' do
     cause = user_with_causes.issues.last
-    cause.content = Faker::Lorem.characters(20001)
-    expect(cause.valid?).to be_falsey
+    cause.content = Faker::Lorem.characters(20_001)
+    expect(cause.valid?).to equal(false)
   end
 
   it 'user id should be present' do
@@ -37,16 +37,19 @@ RSpec.describe Issue do
   end
 
   describe :supported_by_user? do
-    before do
-      cause = user_with_causes.issues.first
-      user2.support_issue(cause)
-    end
-
     it 'should have non-zero supporting users for a cause' do
       cause = user_with_causes.issues.first
-      expect(cause.supported_users_count).to equal(1)
+      user2.support_issue(cause)
+      expect(cause.supported_by_user?(user2)).to equal(true)
+    end
+  end
 
-      expect(cause.supported_by_user?(user2)).to be_truthy
+  describe :supported_users_count do
+    it 'should match the count of supported users to that of expected' do
+      cause = user_with_causes.issues.first
+      user2.support_issue(cause)
+      count = cause.supported_users_count
+      expect(count).to equal(1)
     end
   end
 end
