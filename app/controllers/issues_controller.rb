@@ -27,7 +27,7 @@ class IssuesController < ApplicationController
     redirect_to @current_user
   end
 
-  def edit;  end
+  def edit; end
 
   def update
     update_attributes

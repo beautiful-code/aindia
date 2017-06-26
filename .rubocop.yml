@@ -9,12 +9,8 @@ AllCops:
     - 'spec/rails_helper.rb'
     - 'test/test_helper.rb'
     - 'config/puma.rb'
-    - 'config/initializers/devise.rb'
-    - 'config/initializers/bower_rails.rb'
-    - 'config/initializers/wrap_parameters.rb'
-    - 'config/initializers/backtrace_silencers.rb'
-    - 'config/initializers/assets.rb'
-    - 'config/initializers/new_framework_defaults.rb'
+    - 'config/spring.rb'
+    - 'config/initializers/*'
     - 'app/helpers/application_helper.rb'
     - 'db/**/*'
     - 'bin/*'
@@ -26,4 +22,32 @@ Metrics/AbcSize:
   Max: 20
 Metrics/MethodLength:
   CountComments: false
-  Max: 15
+  Max: 20
+Metrics/ModuleLength:
+  Exclude:
+    - "**/*_spec.rb"
+    - "app/helpers/users_helper.rb"
+Metrics/AbcSize:
+  Enabled: false
+Metrics/BlockLength:
+  Enabled: false
+Style/SymbolArray:
+  Enabled: false
+Style/ClassAndModuleChildren:
+  Enabled: false
+Date:
+  Enabled: false
+ParenthesesAsGroupedExpression:
+  Enabled: false
+Metrics/ClassLength:
+  Enabled: false
+Lint/HandleExceptions:
+  Enabled: false
+Rails/FindEach:
+  Enabled: false
+Style/FrozenStringLiteralComment:
+  Enabled: false
+Documentation:
+  Enabled: false
+CyclomaticComplexity:
+  Enabled: false
