@@ -4,8 +4,8 @@
     %a.list-group-item
       %span.pull-right
         -if @current_user.following?(sinterest)
-          = button_to "Unfollow", { action: "update_follow_interests", interest_id: sinterest }
+          = button_to "Unfollow", update_follow_interests_user_path(@current_user), params: { interest_id: sinterest }
         -else
-          = button_to "Follow", { action: "update_follow_interests", interest_id: sinterest }
+          = button_to "Follow", update_follow_interests_user_path(@current_user), params: { interest_id: sinterest }
       %h3.list-group-item-heading #{sinterest.title}
       %p.list-group-item-text #{sinterest.description}

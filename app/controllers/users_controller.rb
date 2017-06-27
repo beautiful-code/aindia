@@ -6,6 +6,8 @@ class UsersController < ApplicationController
   before_action :redirect_if_logged_in, only: %i[new create]
   skip_before_action :verify_user_has_logged_in, except: [:show]
   before_action :set_user, only: [:show]
+  # TODO
+  # before_action :verify_correct_user, except: [:interests]
 
   def new
     redirect_to user if logged_in?

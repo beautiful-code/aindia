@@ -13,17 +13,14 @@ RSpec.describe SocialInterest do
   end
 
   it 'should return false if title is not present' do
-    expect(socialinterest1.title).not_to be_nil
+    socialinterest1.title = nil
+    expect(socialinterest1.save).to be_falsey
   end
 
   it 'should increment the followers count by 1 if user follows an interest' do
     cnt = socialinterest2.users.count
     user.follow_interest(socialinterest2)
     expect(socialinterest2.users.count).to be == cnt + 1
-  end
-
-  it 'should return true if number of followers are zero' do
-    expect(socialinterest1.users.count).to be == 0
   end
 
   describe :following? do

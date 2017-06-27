@@ -26,16 +26,6 @@ RSpec.describe Issue do
     expect(cause.valid?).to equal(false)
   end
 
-  it 'user id should be present' do
-    cause = user_with_causes.issues.first
-    expect(cause.user.id).not_to be_nil
-  end
-
-  it 'title should be present' do
-    cause = user_with_causes.issues.first
-    expect(cause.title).not_to be_nil
-  end
-
   describe :supported_by_user? do
     it 'should have non-zero supporting users for a cause' do
       cause = user_with_causes.issues.first
