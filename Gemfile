@@ -22,6 +22,8 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'rails', '~> 5.0.2'
 gem 'sass-rails', '~> 5.0'
+gem 'turbolinks'
+gem 'tzinfo-data'
 gem 'uglifier', '>= 1.3.0'
 gem 'will_paginate', '3.1.0'
 
