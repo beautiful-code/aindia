@@ -6,6 +6,8 @@ class User < ApplicationRecord
   validates :name, presence: true
   validates :email, presence: true
   validates :oauth_token, presence: true
+
+  # TODO: validates :name, :email, :oauth_token, presence: true
   has_and_belongs_to_many :supported_issues, class_name: 'Issue'
   # supported issues
 
@@ -38,6 +40,7 @@ class User < ApplicationRecord
     else
       follow_interest(social_interest)
     end
+    # TODO: following?(social_interest) ? unfollow_interest(social_interest) : follow_interest(social_interest)
   end
 
   def follow_interest(social_interest)
@@ -60,6 +63,7 @@ class User < ApplicationRecord
     else
       support_issue(issue)
     end
+    # TODO: Convert to a tertiary
   end
 
   def support_issue(issue)
@@ -69,6 +73,13 @@ class User < ApplicationRecord
   def unsupport_issue(issue)
     supported_issues.delete(issue)
   end
+
+  # TODO: Make this code work
+=begin
+  def ordered_relevant_issues
+    social_interests.collect {|si| si.issues}.flatten.uniq.order_by(:created_at)
+  end
+=end
 
   def issues_based_on_my_interests
     if social_interests.count.positive?
@@ -80,4 +91,36 @@ class User < ApplicationRecord
       Issue.all
     end
   end
+
 end
+
+
+=begin
+Where to put the methods?
+@user.relevant_issues
+Issue.relevent_issues(user)
+
+TDD
+Describe user
+  'I should see my relevant issues' do
+    @user = User.find(...)
+    @user.si = 'Cleanliness'
+
+    @issue = Issue.create(tag: 'Cleanliness', ...)
+
+    @user.relevant_issues.should include(@issue)
+    
+    @user.relevant_issues.should include(@issue)
+
+
+
+  end
+
+Issue.relevant_issues(user, location_of_user, ...)
+1) look at si
+2) look at the radius of hte user.
+
+ReleventIssues.compute(user,
+  
+
+=end

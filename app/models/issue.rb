@@ -10,6 +10,7 @@ class Issue < ApplicationRecord
   validates :user_id, presence: true
   validates :title, presence: true, length: { maximum: 140 }
   validates :content, presence: true, length: { maximum: 20_000 }
+
   has_and_belongs_to_many :social_interests, class_name: 'SocialInterest'
   has_and_belongs_to_many :supported_users, class_name: 'User'
 
@@ -21,3 +22,6 @@ class Issue < ApplicationRecord
     supported_users.count
   end
 end
+
+
+

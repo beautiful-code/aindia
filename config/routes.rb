@@ -3,8 +3,9 @@
 Rails.application.routes.draw do
   # root 'users#new'
   root 'static_pages#home'
+
   get 'static_pages/home'
-  get 'sessions/create'
+  get 'sessions/create' # TODO: Name your route. login_path
   get '/auth/:provider/callback', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
 

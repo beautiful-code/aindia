@@ -17,6 +17,7 @@ RSpec.describe User do
 
   %i[name email oauth_token].each do |field|
     it 'should return error if #{field} is nil' do
+    # TODO: it 'should return error if #{field} is not present' do
       user.send("#{field}=".to_sym, nil)
       expect(user.valid?).to be_falsey
     end
@@ -51,6 +52,7 @@ RSpec.describe User do
     end
   end
 
+  # TODO: it 'should delete all the associated causes on deletion' do
   it 'associated causes should be destroyed on deletion' do
     count = user_with_causes.issues.count
     total_count = Issue.all.count
@@ -63,9 +65,12 @@ RSpec.describe User do
       user.follow_interest(socialinterest3)
       expect(user.following?(socialinterest3)).to be_truthy
     end
+
+    it 'should not do anything if the user is already following the interest'
   end
 
   describe :unfollow_interest do
+    # TODO: Expose unfollow_interest as public.
     it 'should allow user to unfollow the interest' do
       user.follow_interest(socialinterest3)
       user.update_follow_interests(socialinterest3)
@@ -75,6 +80,7 @@ RSpec.describe User do
 
   describe :following? do
     it 'should return true if user follows the interest' do
+      # TODO: user.follow_interest(socialinterest2)
       expect(user.following?(socialinterest2)).to be_truthy
     end
 
@@ -83,14 +89,16 @@ RSpec.describe User do
     end
   end
 
+  # TODO: This raises a flag on your names.
   describe :support_issue do
-    it 'should support user to support the issue' do
+    it 'should allow the user to support the issue' do
       cause = user_with_causes.issues.first
       user.update_support_issue(cause)
       expect(user.supporting?(cause)).to equal(true)
     end
   end
 
+  # TODO: This raises a flag on your names.
   describe :unsupport_issue do
     it 'should allow user to unsupport the issue' do
       cause = user_with_causes.issues.first
@@ -114,13 +122,13 @@ RSpec.describe User do
   end
 
   describe :issues_based_on_my_interests do
-    it 'should return all the causes in feed if user is not following
+    it 'should return all the causes in the system if user is not following
         any interests' do
       count = user_with_causes.issues.count
       expect(tempuser.issues_based_on_my_interests.count).to be_equal(count)
     end
 
-    it 'should return only causes with social interest in feed if following
+    it 'should return only causes with the users social interest if following
         any social interest' do
       tempuser.follow_interest(socialinterest1)
       count = socialinterest1.issues.count
@@ -128,5 +136,19 @@ RSpec.describe User do
 
       # Object comparison is the ideal logic here.
     end
+
+=begin
+    it 'should return only causes relevent to the users si sorted by their creation date' do
+      tempuser.follow_interest(socialinterest1)
+      tempuser.follow_interest(socialinterest2)
+
+      issues1 = socialinterest1.issues
+      issues2 = socialinterest2.issues
+
+      expect(tempuser.issues_based_on_my_interests).should == (issues1 + issues2).uniq.sort_by(:created_at)
+    end
+=end
+
+
   end
 end
