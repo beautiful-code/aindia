@@ -21,9 +21,9 @@
   .form-group
     %b #{issue.title.humanize}
   .form-group
-    %span.content
+    .content
       = issue.content.gsub(/\n/, '<br/>').html_safe
-      = image_tag issue.imageurl.url if issue.imageurl?
+    = image_tag issue.imageurl.url if issue.imageurl?
   - unless from_profile
     %div
       %font{:color => "gray"} Raised By:
