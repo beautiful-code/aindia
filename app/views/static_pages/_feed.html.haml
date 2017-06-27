@@ -1,0 +1,6 @@
+-# .col-md-
+.col-md-8
+  - if @feed_items.any?
+    .feed_items
+      = render(partial: 'shared/issue', collection: @feed_items, as: 'issue', locals:  { from_profile: false } ) || "There's no ad to be displayed"
+.col-md-3

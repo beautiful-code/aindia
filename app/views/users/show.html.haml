@@ -3,4 +3,12 @@
   %aside.col-md-4
     %section.user_info
       %h1
+        = image_for @user
         = @user.name
+  .col-md-8
+    - if @user.issues.any?
+      %h3
+        Causes (#{@user.issues.count})
+      .issues
+        = render(partial: 'shared/issue', collection: @issues, as: 'issue', locals:  { from_profile: true } ) || "There's no ad to be displayed"
+      = will_paginate @issues

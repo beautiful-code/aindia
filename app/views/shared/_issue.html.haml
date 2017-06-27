@@ -1,0 +1,38 @@
+
+%head
+  %link{:href => "https://fonts.googleapis.com/icon?family=Material+Icons", :rel => "stylesheet"}
+.card{:id => "#{issue.id}"}
+  .form-group
+    - issue.social_interests.each do |sinterest|
+      .chip
+        #{sinterest.title}
+    - if from_profile
+      - if current_user?(issue.user)
+        %span.pull-right
+          .dropdown
+            %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+              %i.material-icons.edit-icon edit
+            %ul.dropdown-menu
+              %li= link_to "Edit", edit_issue_path(issue)
+              %li= link_to "Delete", issue, method: :delete, |
+            data: { confirm: "You sure?" }
+    %span.pull-right
+      #{time_ago_in_words(issue.created_at)} ago.
+  .form-group
+    %b #{issue.title.humanize}
+  .form-group
+    .content
+      = issue.content.gsub(/\n/, '<br/>').html_safe
+    = image_tag issue.imageurl.url if issue.imageurl?
+  - unless from_profile
+    %div
+      %font{:color => "gray"} Raised By:
+      = link_to issue.user.name, user_path(issue.user)
+  %hr
+  - if issue.supported_by_user?(@current_user)
+    = button_to "Support", update_support_issue_user_path(@current_user), params: { issue_id: issue}, class: "supported-button"
+  - else
+    = button_to "Support", update_support_issue_user_path(@current_user), params: { issue_id: issue}, class: "support-button"
+  - if issue.supported_users_count > 0
+    %a{"data-target" => "#SupportedUsersModal#{issue.id}", "data-toggle" => "modal", :type => "button", "class" => "supported-button" } #{issue.supported_users_count}
+    = render 'shared/supported_users_modal', issue: issue

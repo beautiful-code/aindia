@@ -1,9 +1,10 @@
-- provide(:title, @user.name)
+- provide(:title, @current_user.name)
 -# .row
 -#   %aside.col-md-4
 -#     %section.user_info
 -#       %h1
 -#         = "Select Interests"
-.content
+.col-md-2
+.col-md-8
   = render 'layouts/heading', :locals => {:headingtext => 'Social Interests'}
   = render 'interests'

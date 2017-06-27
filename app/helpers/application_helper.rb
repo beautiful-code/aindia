@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 module ApplicationHelper
-def full_title(page_title = '')
-  base_title = "Adopt India"
-  if page_title.empty?
-    base_title
-  else
-    page_title + " | " + base_title
+  def full_title(page_title = '')
+    base_title = "Social Quora"
+    if page_title.empty?
+      base_title
+    else
+      page_title + " | " + base_title
+    end
   end
-end
 end

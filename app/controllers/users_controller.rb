@@ -1,25 +1,26 @@
-class UsersController < ApplicationController
-  before_action :redirect_if_logged_in, only: [:new, :create]
+# frozen_string_literal: true
 
-  include UsersHelper
+class UsersController < ApplicationController
+  include SupportIssue
+
+  before_action :redirect_if_logged_in, only: %i[new create]
+  skip_before_action :verify_user_has_logged_in, except: [:show]
+  before_action :set_user, only: [:show]
+  # TODO
+  # before_action :verify_correct_user, except: [:interests]
 
   def new
-    if logged_in?
-      redirect_to user
-    end
+    redirect_to user if logged_in?
   end
 
   def show
-    @user = User.find(params[:id])
+    @issues = @user.issues.paginate(page: params[:page])
   end
 
-  def edit
-    @user = User.find(params[:id])
-  end
+  def edit; end
 
   def update
-    @user = User.find(params[:id])
-    if @user.update_attributes(user_params)
+    if @current_user.update_attributes(user_params)
       # Handle a successful update.
     else
       render 'edit'
@@ -31,21 +32,35 @@ class UsersController < ApplicationController
   def destroy
     user = User.find(params[:id])
     user.destroy
-    flash[:success] = "User deleted"
+    flash[:success] = 'User deleted'
+
     redirect_to users_url
   end
 
-  def interests
+  def interests; end
+
+  def update_follow_interests
+    interest = SocialInterest.find(params[:interest_id])
+    @current_user.update_follow_interests(interest)
+    redirect_to :back
+  end
+
+  private
+
+  def set_user
     @user = User.find(params[:id])
   end
 
-private
-def user_params
-  params.require(:user).permit(:name, :uid, :provider, :oauth_token, :oauth_expires_at, :email, :image_url, :dob, :gender)
-end
+  def user_params
+    params.require(:user).permit(
+      %i[
+        name uid provider oauth_token oauth_expires_at email
+        image_url dob gender
+      ]
+    )
+  end
 
-def redirect_if_logged_in
-  redirect_to @current_user if logged_in?
-end
-
+  def redirect_if_logged_in
+    redirect_to @current_user if logged_in?
+  end
 end

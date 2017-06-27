@@ -1,18 +1,21 @@
-Rails.application.routes.draw do
-  root 'users#new'
-  get 'users/new'
-  get 'sessions/create'
-  delete '/logout',  to: 'sessions#destroy'
-  put 'select_interests', to: 'users#selectinterests', as: :select_interests
+# frozen_string_literal: true
 
-  resources :users do
+Rails.application.routes.draw do
+  # root 'users#new'
+  root 'static_pages#home'
+
+  get 'static_pages/home'
+  get 'sessions/create' # TODO: Name your route. login_path
+  get '/auth/:provider/callback', to: 'sessions#create'
+  delete '/logout', to: 'sessions#destroy'
+
+  resources :users, only: [:show, :new, :create] do
     member do
       get 'interests'
+      post 'update_support_issue'
+      post 'update_follow_interests'
     end
   end
-  resources :issues,          only: [:new, :create, :destroy]
 
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  match '/auth/:provider/callback', :to => 'sessions#create', via: :get
-
+  resources :issues, only: %i[new create destroy edit update]
 end

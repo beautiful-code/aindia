@@ -4,12 +4,15 @@
 <body>
 <header class="navbar navbar-fixed-top navbar-inverse">
   <div class="container">
-    <%= link_to "ADOPT INDIA", root_path, id: "logo" %>
+    <%= link_to "SOCIAL QUORA", root_path, id: "logo" %>
     <nav>
       <ul class="nav navbar-nav navbar-right">
 
-        <li class="material-icons md-light"><%= link_to "home" %></li>
-        <li class="material-icons md-light"><%= link_to "help" %></li>
+        <% if logged_in? %>
+        <li><%= link_to "Create A Cause", new_issue_path %></li>
+        <% end %>
+        <li class="material-icons md-light"><%= link_to "home", root_path %></li>
+        <!-- <li class="material-icons md-light"><%= link_to "help" %></li> -->
 
         <% if logged_in? %>
         <li class="dropdown">
@@ -17,9 +20,7 @@
             <i class="material-icons md-light">account_circle</i> <b class="caret" style="vertical-align: middle"></b>
           </a>
           <ul class="dropdown-menu">
-            <li><%= link_to "Create An Issue", new_issue_path %></li>
             <li><%= link_to "Profile", current_user %></li>
-            <li><%= link_to "Settings", edit_user_path(current_user) %></li>
             <li><%= link_to "Customize your Interests", interests_user_path(current_user) %></li>
               <li class="divider"></li>
               <li>

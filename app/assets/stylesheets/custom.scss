@@ -29,7 +29,8 @@ $navbar-inverse-bg: $theme-color;
 }
 
 body {
-  padding-top: 80px
+  padding-top: 80px;
+  background-color: #EEE;
 }
 
 .app {
@@ -73,7 +74,7 @@ h3 {
   font-size: 1.2em;
   text-align: left;
   font-weight: bold;
-  margin-bottom: -15px
+  // margin-bottom: -15px
 }
 
 // button
@@ -83,27 +84,97 @@ button {
     opacity: 1.0
  }
 
-material-icons {
-  font-family: 'Material Icons';
+/* issues */
+
+.issues {
+  list-style: none;
+  padding: 0;
+  li {
+    padding: 10px;
+    border-top: 1px solid #e8e8e8;
+  }
+  .user {
+    margin-top: 5em;
+    padding-top: 0;
+  }
+  .content {
+    display: block;
+    margin-left: 2px;
+    margin-top: 35px;
+    margin-bottom: 10px;
+    img {
+      display: block;
+      padding: 5px 0;
+    }
+  }
+  .timestamp {
+    color: $gray-light;
+    display: block;
+    margin-left: 2px;
+  }
+  .gravatar {
+    float: left;
+    margin-right: 10px;
+    margin-top: 5px;
+  }
+}
+
+.card {
+  margin-top: 10px;
+  padding: 20px;
+  border: 0.1px solid #ddd;
+  border-radius: 5px;
+  background-color: #ffffff;
+}
+
+aside {
+  textarea {
+    height: 100px;
+    margin-bottom: 5px;
+  }
+}
+
+span.picture {
+  margin-top: 10px;
+  input {
+    border: 0;
+  }
+}
+
+.chip {
+    display: inline-block;
+    padding: 0 25px;
+    height: 26px;
+    font-size: 12px;
+    line-height: 26px;
+    border-radius: 10px;
+    background-color: #f1f1f1;
+    border-width: thick;
+}
+
+.edit-icon {
+  font-size: 20px;
+  color: gray;
+  margin-left: 20px;
+}
+
+.edit-icon:hover {
+  text-decoration: none;
+}
+
+.support-button {
+  font-size: 15px;
+  color: gray;
+  margin: 5px;
+}
+
+.supported-button {
+  font-size: 15px;
+  color: blue;
   font-weight: bold;
-  font-style: normal;
-  font-size: 24px;  /* Preferred icon size */
-  display: inline-block;
-  line-height: 1;
-  text-transform: none;
-  letter-spacing: normal;
-  word-wrap: normal;
-  white-space: nowrap;
-  direction: ltr;
+  margin: 5px;
+}
 
-  /* Support for all WebKit browsers. */
-  -webkit-font-smoothing: antialiased;
-  /* Support for Safari and Chrome. */
-  text-rendering: optimizeLegibility;
-
-  /* Support for Firefox. */
-  -moz-osx-font-smoothing: grayscale;
-
-  /* Support for IE. */
-  font-feature-settings: 'liga';
+.button_to {
+  display: inline;
 }

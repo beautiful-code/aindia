@@ -1,20 +1,33 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-socialinterests:
+social_interests:
   -
       title: Education
-      description: MyText1
+      description: School ends, but education doesn't.
       image_url: imag1
       followerscount: 4
-
   -
-      title: Sanitation
-      description: MyText2
+      title: Donations
+      description: No one has ever become poor by giving.
+      image_url: image1
+      followerscount: 4
+  -
+      title: Government Intervention
+      description: It makes every one's life invariably better.
+      image_url: image1
+      followerscount: 4
+  -
+      title: Food
+      description: For a slim figure, share your food with the hungry.
       image_url: imag2
       followerscount: 5
-
   -
-      title: Food-Donation
-      description: MyText3
+      title: Sanitation
+      description: Clean Clean Clean
+      image_url: imag3
+      followerscount: 13
+  -
+      title: Volunteers
+      description: They just have the heart.
       image_url: imag3
       followerscount: 13

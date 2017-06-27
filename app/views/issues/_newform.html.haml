@@ -1,20 +1,26 @@
 = form_for(issue) do |f|
-  - if issue.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(issue.errors.count, "error")
-        prohibited this issue from being saved:
-      %ul
-        - issue.errors.full_messages.each do |message|
-          %li= message
+  .form-group
+    = render 'shared/error_messages', object: f.object
+
+  .form-group
+    - SocialInterest.all.each do |sinterest|
+      %label.checkbox-inline
+        = check_box_tag :social_interest_ids, sinterest.id, @issue.social_interests.include?(sinterest), :name => "issue[social_interest_ids][]"
+        = sinterest.title
   .form-group
     = f.label :title
-    = f.text_field :title, class: 'form-control'
-  .form-group
-    = f.label :content
-    = f.text_area :content, class: 'form-control'
+    = f.text_field :title, maxlength: 80, class: 'form-control'
   .form-group
     %span.picture
       = f.file_field :imageurl
   .form-group
-    = submit_tag 'Create Issue', class: "btn btn-primary"
+    = f.label :content
+    = f.text_area :content, maxlength: 20000, :rows => 8, style: 'width:100%;', class: 'form-control'
+  .form-group
+    = f.label :impact
+    = f.text_field :impact, class: 'form-control'
+  .form-group
+    - if @issue.id.nil?
+      = submit_tag 'Post', class: "btn btn-primary pull-right"
+    - else
+      = submit_tag 'Update', class: "btn btn-primary pull-right"

@@ -1,7 +1,9 @@
+# frozen_string_literal: true.
+
 source 'https://rubygems.org'
 
 git_source(:github) do |repo_name|
-  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
+  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?('/')
   "https://github.com/#{repo_name}.git"
 end
 
@@ -20,6 +22,8 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'rails', '~> 5.0.2'
 gem 'sass-rails', '~> 5.0'
+gem 'turbolinks'
+gem 'tzinfo-data'
 gem 'uglifier', '>= 1.3.0'
 gem 'will_paginate', '3.1.0'
 
@@ -36,4 +40,9 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen'
   gem 'web-console'
+end
+
+group :test do
+  gem 'factory_girl_rails'
+  gem 'faker'
 end

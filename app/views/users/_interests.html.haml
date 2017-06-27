@@ -1,7 +1,11 @@
 .list-group
-  - SOCIAL_INTERESTS.each do |sinterest|
-    %a.list-group-item{:href => "#"}
+  - SocialInterest.all.each do |sinterest|
+    -# %a.list-group-item{:href => "#"}
+    %a.list-group-item
       %span.pull-right
-        %button.btn.btn-default{:type => "submit"} Follow
-      %h3.list-group-item-heading #{sinterest["title"]}
-      %p.list-group-item-text #{sinterest["description"]}
+        -if @current_user.following?(sinterest)
+          = button_to "Unfollow", update_follow_interests_user_path(@current_user), params: { interest_id: sinterest }
+        -else
+          = button_to "Follow", update_follow_interests_user_path(@current_user), params: { interest_id: sinterest }
+      %h3.list-group-item-heading #{sinterest.title}
+      %p.list-group-item-text #{sinterest.description}

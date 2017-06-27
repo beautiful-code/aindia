@@ -1,3 +1,4 @@
-require 'yaml'
+# frozen_string_literal: true
 
-SOCIAL_INTERESTS = YAML.load_file("#{Rails.root}/config/socialinterests.yml")["socialinterests"]
+require 'yaml'
+include ApplicationHelper
